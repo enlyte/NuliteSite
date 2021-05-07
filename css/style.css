@@ -1,0 +1,17 @@
+
+
+
+label.error{
+color: #ffc86c !important;
+
+/* color: #3498db !important; */
+}
+
+label.valid{
+margin-left: 5px !important;
+color: #ecf0f1 !important;
+/* color: #95a5a6 !important; */
+
+}
+
+

@@ -1,0 +1,352 @@
+/*!
+ * Start Bootstrap - Landing Page Bootstrap Theme (http://startbootstrap.com)
+ * Code licensed under the Apache License v2.0.
+ * For details, see http://www.apache.org/licenses/LICENSE-2.0.
+ */
+
+body,
+html {
+    width: 100%;
+    height: 100%;
+}
+
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    /* font-family: "Lato","Helvetica Neue",Helvetica,Arial,sans-serif; */
+    font-weight: 700;
+    text-align: center;
+}
+
+/*
+.custom-primary{
+	
+	background-color:green;
+	}
+	
+*/
+/* .bg-primary{color:#fff;background-color:green} */
+
+
+
+.video-container {
+    position: relative;
+    padding-bottom: 56.25%;
+    padding-top: 30px; height: 0; overflow: hidden;
+    padding-left: 0;
+	padding-right: 0;
+}
+ 
+.video-container iframe,
+.video-container object,
+.video-container embed {
+    position: absolute;
+    top: 0;
+    left: 10%;
+    width: 80%;
+    height: 80%;
+}
+
+
+.lead {
+    font-size: 18px;
+    font-weight: 400;
+}
+
+.intro-header {
+    padding-top: 50px; /* If you're making other pages, make sure there is 50px of padding to make sure the navbar doesn't overlap content! */
+    padding-bottom: 50px;
+/*     text-align: center; */
+	/* text-align: right; */
+    
+    color: #f8f8f8; 
+/*     WHITE */
+    
+    
+    background-color:#24ACAB;
+    /*background-color:#1abc9c; /*#36b87b; */
+    /* background: url(../img/greenGrade1.png) no-repeat center center; */
+
+	/*background-color:black;/* #36b87b; */	
+	
+	/* background-image:  */
+    background-size: cover;
+}
+
+.intro-message {
+
+	/* text-align: center; */
+    position: relative;
+    padding-top: 20%;
+    padding-bottom: 0%;
+}
+.intro-second-message {
+
+	/* text-align: center; */
+
+}
+
+
+.ipad {
+
+    position: relative;
+    padding-top: 30%;
+    padding-bottom: 10%;
+}
+
+.pad {
+
+/*
+    position: relative;
+    padding-top: 30%;
+*/	
+	padding-left: 15%;
+	padding-right: 10%;
+    padding-bottom: 10%;
+    
+}
+
+.pad-top {
+	padding-top: 25px;
+}
+
+.pad-top2 {
+	padding-top: 75px;
+}
+
+.pad-bottom {
+	padding-bottom: 75px;
+}
+
+.email-padding {
+	padding-left: 20%;
+	padding-right: 20%;
+}
+
+.email-padding1 {
+	padding-left: 7%;
+	padding-right: 7%;
+}
+
+.email-padding2 {
+	padding-left: 40%;
+	padding-right: 40%;
+
+}
+
+.width4 {
+ width: 300px;
+ text-align: center;
+ 
+}
+
+.service {
+    padding: 50px 0;
+}
+.service-item {
+    padding-top: 5%;
+    padding-bottom: 5%;
+}
+
+}
+
+.green {
+
+   /* background-color:#2ecc71; */
+   /* background-color:#1abc9c; OLD GREEN */ 
+   
+   background-color:#24ACAB;
+}
+.green-text {
+
+   /* color:#2ecc71; */
+   /*
+color: #1abc9c;
+   color: #ffc86c;
+*/
+   /* color: #e2b061; */
+   color:#1abc9c;
+}
+
+.gold {
+	/* background-color: #ffc86c; */
+	background-color: #e2b061;
+
+
+/* 	background-color: #ce994c; */
+}
+
+.gold-text {
+	color: #e2b061;
+	/* color: #ffc86c; */
+}
+
+.gold-text2 {	
+	color: #ffc86c;
+	float: left;
+    font-size: 18px;
+    height: 50px;
+    line-height: 20px;
+    padding: 15px;
+   }
+
+ul.gold-text a:hover { 
+color: #ce994c !important; 
+/* lighter */
+color: #e2b061 !important;
+}
+
+.white {
+
+   background-color:#ffffff;
+}
+.white-text {
+
+   color:#ffffff;
+}
+
+.cloud {
+ background-color: #ecf0f1;
+}
+
+.intro-message > h1 {
+    margin: 0;
+    /* text-shadow: 2px 2px 3px rgba(0,0,0,0.6); */
+    font-size: 5em;
+}
+
+.intro-divider {
+	
+    width: 280px;
+    
+    border-top: 1px solid #f8f8f8;
+    border-bottom: 1px solid rgba(0,0,0,0.2);
+}
+
+.intro-message > h3 {
+    /* text-shadow: 2px 2px 3px rgba(0,0,0,0.6); */
+}
+
+@media(max-width:767px) {
+    .intro-message {
+        padding-bottom: 15%;
+    }
+
+    .intro-message > h1 {
+        font-size: 3em;
+    }
+
+    ul.intro-social-buttons > li {
+        display: block;
+        margin-bottom: 20px;
+        padding: 0;
+    }
+
+    ul.intro-social-buttons > li:last-child {
+        margin-bottom: 0;
+    }
+
+    .intro-divider {
+        width: 100%;
+    }
+}
+
+.network-name {
+    text-transform: uppercase;
+    font-size: 14px;
+    font-weight: 400;
+    letter-spacing: 2px;
+}
+
+.content-section-a {
+    padding: 50px 0;
+    /* background-color: #f8f8f8; */
+	background-color: #ecf0f1;
+	
+}
+
+.content-section-b {
+    padding: 50px 0;
+    border-top: 1px solid #e7e7e7;
+    border-bottom: 1px solid #e7e7e7;
+    /*  background-color: #95a5a6;  */
+   /* background-color:#24ACAB; */
+}
+
+.section-heading {
+    margin-bottom: 30px;
+   
+}
+
+.section-heading-spacer {
+	/* text-align: center; */
+    float: none;
+    width: 250px;
+    border-top: 3px solid #e7e7e7;
+}
+
+.banner {
+    padding: 100px 0;
+    color: #f8f8f8;
+   /*  background: url(../img/banner-bg.jpg) no-repeat center center; */
+   background-color:#1abc9c;
+   background-color:#24ACAB;
+    background-size: cover;
+}
+
+.banner h2 {
+    margin: 0;
+    /* text-shadow: 2px 2px 3px rgba(0,0,0,0.6); */
+    font-size: 3em;
+}
+
+.banner ul {
+    margin-bottom: 0;
+}
+
+.banner-social-buttons {
+    float: right;
+    margin-top: 0;
+}
+
+@media(max-width:1199px) {
+    ul.banner-social-buttons {
+        float: left;
+        margin-top: 15px;
+    }
+}
+
+@media(max-width:767px) {
+    .banner h2 {
+        margin: 0;
+        /* text-shadow: 2px 2px 3px rgba(0,0,0,0.6); */
+        font-size: 3em;
+    }
+
+    ul.banner-social-buttons > li {
+        display: block;
+        margin-bottom: 20px;
+        padding: 0;
+    }
+
+    ul.banner-social-buttons > li:last-child {
+        margin-bottom: 0;
+    }
+}
+
+footer {
+    padding: 50px 0;
+    /* background-color: #f8f8f8; */
+    background-color: #ecf0f1;
+    background-color: #1abc9c;
+    background-color:#24ACAB;
+    
+}
+
+p.copyright {
+    margin: 15px 0 0;
+}
