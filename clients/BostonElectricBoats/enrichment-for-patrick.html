@@ -120,6 +120,14 @@
     min-width: 90px;
     text-align: right;
   }
+  .save-status {
+    font-size: 0.7em;
+    color: var(--green-border);
+    font-weight: 600;
+    white-space: nowrap;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
 
   /* ===== LAYOUT ===== */
   .container { max-width: 760px; margin: 0 auto; padding: 24px 20px 60px; }
@@ -524,6 +532,7 @@
 <!-- PROGRESS BAR -->
 <div class="progress-wrap">
   <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+  <span class="save-status" id="saveStatus"></span>
   <div class="progress-text" id="progressText">0 / 0 answered</div>
 </div>
 
@@ -893,27 +902,72 @@
 
 </div><!-- /container -->
 
-<!-- PROGRESS TRACKER SCRIPT -->
+<!-- PROGRESS TRACKER + AUTOSAVE SCRIPT -->
 <script>
 (function() {
-  const textareas = document.querySelectorAll('textarea');
-  const checkboxes = document.querySelectorAll('input[type="checkbox"]');
-  const fill = document.getElementById('progressFill');
-  const text = document.getElementById('progressText');
-  const total = textareas.length + checkboxes.length;
+  var STORAGE_KEY = 'beb-enrichment-form';
+  var textareas = document.querySelectorAll('textarea');
+  var checkboxes = document.querySelectorAll('input[type="checkbox"]');
+  var fill = document.getElementById('progressFill');
+  var text = document.getElementById('progressText');
+  var total = textareas.length + checkboxes.length;
+  var saveTimer = null;
 
   function update() {
-    let filled = 0;
-    textareas.forEach(t => { if (t.value.trim().length > 0) filled++; });
-    checkboxes.forEach(c => { if (c.checked) filled++; });
-    const pct = Math.round((filled / total) * 100);
+    var filled = 0;
+    textareas.forEach(function(t) { if (t.value.trim().length > 0) filled++; });
+    checkboxes.forEach(function(c) { if (c.checked) filled++; });
+    var pct = Math.round((filled / total) * 100);
     fill.style.width = pct + '%';
     text.textContent = filled + ' / ' + total + ' answered';
   }
 
-  textareas.forEach(t => t.addEventListener('input', update));
-  checkboxes.forEach(c => c.addEventListener('change', update));
+  function save() {
+    var data = { textareas: [], checkboxes: [], savedAt: new Date().toISOString() };
+    textareas.forEach(function(t) { data.textareas.push(t.value); });
+    checkboxes.forEach(function(c) { data.checkboxes.push(c.checked); });
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(data)); } catch(e) {}
+    showSaved();
+  }
+
+  function restore() {
+    try {
+      var raw = localStorage.getItem(STORAGE_KEY);
+      if (!raw) return;
+      var data = JSON.parse(raw);
+      if (data.textareas) {
+        data.textareas.forEach(function(val, i) { if (textareas[i]) textareas[i].value = val; });
+      }
+      if (data.checkboxes) {
+        data.checkboxes.forEach(function(val, i) { if (checkboxes[i]) checkboxes[i].checked = val; });
+      }
+    } catch(e) {}
+  }
+
+  function debouncedSave() {
+    clearTimeout(saveTimer);
+    saveTimer = setTimeout(save, 500);
+  }
+
+  function showSaved() {
+    var el = document.getElementById('saveStatus');
+    if (!el) return;
+    el.textContent = 'Progress saved';
+    el.style.opacity = '1';
+    setTimeout(function() { el.style.opacity = '0'; }, 2000);
+  }
+
+  // Restore saved data on load
+  restore();
   update();
+
+  // Save on every change
+  textareas.forEach(function(t) {
+    t.addEventListener('input', function() { update(); debouncedSave(); });
+  });
+  checkboxes.forEach(function(c) {
+    c.addEventListener('change', function() { update(); debouncedSave(); });
+  });
 })();
 </script>
 
