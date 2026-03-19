@@ -168,6 +168,14 @@ body {
   min-width: 90px;
   text-align: right;
 }
+.save-status {
+  font-size: 0.7em;
+  color: var(--green-border);
+  font-weight: 600;
+  white-space: nowrap;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
 
 /* ===== LAYOUT ===== */
 .container { max-width: 760px; margin: 0 auto; padding: 24px 20px 60px; }
@@ -842,5 +850,89 @@ tr:nth-child(even) td { background: var(--gray-50); }
   <p class="footer-note">Prepared by Nulite &bull; March 2026</p>
 </div>
 
+<script>
+/**
+ * ClientPortal — Base JS
+ *
+ * Auto-features for any portal page:
+ *   1. localStorage save/restore for all form fields (textareas + checkboxes)
+ *   2. Progress bar tracking (if .progress-fill and .progress-text exist)
+ *   3. Visual save indicator (if #saveStatus exists)
+ *
+ * Storage key is derived from the page URL path automatically.
+ * Each page gets its own isolated storage — no collisions.
+ */
+(function() {
+  var textareas = document.querySelectorAll('textarea');
+  var checkboxes = document.querySelectorAll('input[type="checkbox"]');
+
+  // No form fields on this page — nothing to do
+  if (textareas.length === 0 && checkboxes.length === 0) return;
+
+  var STORAGE_KEY = 'cp-' + window.location.pathname.replace(/[^a-z0-9]/gi, '-').replace(/-+/g, '-');
+  var fill = document.getElementById('progressFill');
+  var text = document.getElementById('progressText');
+  var total = textareas.length + checkboxes.length;
+  var saveTimer = null;
+
+  function updateProgress() {
+    if (!fill || !text) return;
+    var filled = 0;
+    textareas.forEach(function(t) { if (t.value.trim().length > 0) filled++; });
+    checkboxes.forEach(function(c) { if (c.checked) filled++; });
+    var pct = Math.round((filled / total) * 100);
+    fill.style.width = pct + '%';
+    text.textContent = filled + ' / ' + total + ' answered';
+  }
+
+  function save() {
+    var data = { textareas: [], checkboxes: [], savedAt: new Date().toISOString() };
+    textareas.forEach(function(t) { data.textareas.push(t.value); });
+    checkboxes.forEach(function(c) { data.checkboxes.push(c.checked); });
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(data)); } catch(e) {}
+    showSaved();
+  }
+
+  function restore() {
+    try {
+      var raw = localStorage.getItem(STORAGE_KEY);
+      if (!raw) return;
+      var data = JSON.parse(raw);
+      if (data.textareas) {
+        data.textareas.forEach(function(val, i) { if (textareas[i]) textareas[i].value = val; });
+      }
+      if (data.checkboxes) {
+        data.checkboxes.forEach(function(val, i) { if (checkboxes[i]) checkboxes[i].checked = val; });
+      }
+    } catch(e) {}
+  }
+
+  function debouncedSave() {
+    clearTimeout(saveTimer);
+    saveTimer = setTimeout(save, 500);
+  }
+
+  function showSaved() {
+    var el = document.getElementById('saveStatus');
+    if (!el) return;
+    el.textContent = 'Progress saved';
+    el.style.opacity = '1';
+    setTimeout(function() { el.style.opacity = '0'; }, 2000);
+  }
+
+  // Restore on load, then update progress
+  restore();
+  updateProgress();
+
+  // Bind events
+  textareas.forEach(function(t) {
+    t.addEventListener('input', function() { updateProgress(); debouncedSave(); });
+  });
+  checkboxes.forEach(function(c) {
+    c.addEventListener('change', function() { updateProgress(); debouncedSave(); });
+  });
+})();
+
+</script>
 </body>
 </html>
