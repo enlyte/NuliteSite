@@ -1,0 +1,846 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Boston Electric Boats &mdash; Parking & Transit Guide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+:root {
+    --primary: #001e48;
+    --primary-light: #002a6b;
+    --accent: #cb007c;
+    --accent-dark: #a30064;
+    --accent-light: #f5e0ef;
+    --accent-glow: #ff4dc9;
+    --heading-transform: uppercase;
+    --heading-spacing: 3px;
+    --heading-weight: 700;
+    --font-family: 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  }
+/* ClientPortal — Base CSS Template
+ *
+ * All colors reference CSS custom properties set per-client.
+ * The build script injects :root variables from the client config.
+ *
+ * Required custom properties (set by build):
+ *   --primary, --primary-light, --accent, --accent-dark, --accent-light
+ *   --heading-transform, --heading-spacing, --heading-weight
+ */
+
+/* ===== FOUNDATIONS ===== */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: var(--font-family, 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif);
+  background: var(--gray-50);
+  color: #1a1a2e;
+  line-height: 1.65;
+  font-size: 15px;
+  -webkit-font-smoothing: antialiased;
+}
+
+:root {
+  /* Neutrals (shared across all clients) */
+  --white: #ffffff;
+  --gray-50: #f8f9fb;
+  --gray-100: #f0f2f5;
+  --gray-200: #e2e5ea;
+  --gray-300: #d2d2d2;
+  --gray-500: #777;
+  --gray-700: #444;
+  --charcoal: #0f0f0f;
+  --green-bg: #f0f9f0;
+  --green-border: #34a853;
+  --blue-bg: #eef4fb;
+}
+
+/* ===== TOP NAV ===== */
+.top-nav {
+  background: var(--charcoal);
+  padding: 10px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.top-nav a {
+  color: rgba(255,255,255,0.7);
+  text-decoration: none;
+  font-size: 0.78em;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: color 0.2s;
+}
+.top-nav a:hover { color: var(--white); }
+.top-nav .nav-arrow { font-size: 1.1em; }
+.top-nav .nav-brand {
+  color: rgba(255,255,255,0.4);
+  font-size: 0.68em;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  font-weight: 600;
+}
+
+/* ===== HERO HEADER ===== */
+.hero {
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 50%, var(--primary) 100%);
+  color: var(--white);
+  padding: 48px 24px 44px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.hero::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  right: 0;
+  height: 40px;
+  background: var(--gray-50);
+  clip-path: ellipse(55% 100% at 50% 100%);
+}
+.hero-logo {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  margin: 0 auto 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.hero-logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.hero h1 {
+  font-size: 1.7em;
+  font-weight: var(--heading-weight, 700);
+  text-transform: var(--heading-transform, uppercase);
+  letter-spacing: var(--heading-spacing, 3px);
+  margin-bottom: 6px;
+}
+.hero p {
+  color: var(--gray-300);
+  font-size: 0.95em;
+  font-weight: 400;
+}
+.hero .accent { color: var(--accent); }
+
+/* ===== PROGRESS BAR ===== */
+.progress-wrap {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--white);
+  border-bottom: 1px solid var(--gray-200);
+  padding: 10px 24px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
+.progress-bar {
+  flex: 1;
+  height: 6px;
+  background: var(--gray-200);
+  border-radius: 3px;
+  overflow: hidden;
+}
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent), var(--accent-glow, var(--accent)));
+  border-radius: 3px;
+  width: 0%;
+  transition: width 0.4s ease;
+}
+.progress-text {
+  font-size: 0.75em;
+  color: var(--gray-500);
+  font-weight: 600;
+  white-space: nowrap;
+  min-width: 90px;
+  text-align: right;
+}
+
+/* ===== LAYOUT ===== */
+.container { max-width: 760px; margin: 0 auto; padding: 24px 20px 60px; }
+.container.container--wide { max-width: 960px; padding: 32px 28px 60px; }
+
+/* ===== INTRO CARD ===== */
+.intro {
+  background: var(--white);
+  border-radius: 16px;
+  padding: 28px 28px 24px;
+  margin-bottom: 28px;
+  border: 1px solid var(--gray-200);
+  position: relative;
+  overflow: hidden;
+}
+.intro::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--accent), var(--primary));
+}
+.intro h3 {
+  color: var(--primary);
+  font-size: 1.1em;
+  margin-bottom: 10px;
+}
+.intro p { margin-bottom: 8px; font-size: 0.92em; color: var(--gray-700); }
+.intro .highlight { color: var(--accent); font-weight: 600; }
+
+.stat-row {
+  display: flex;
+  gap: 12px;
+  margin-top: 16px;
+}
+.stat {
+  flex: 1;
+  text-align: center;
+  padding: 12px 8px;
+  background: var(--gray-50);
+  border-radius: 10px;
+  border: 1px solid var(--gray-200);
+}
+.stat .num { font-size: 1.5em; font-weight: 700; color: var(--primary); }
+.stat .lbl { font-size: 0.7em; color: var(--gray-500); text-transform: uppercase; letter-spacing: 1px; margin-top: 2px; }
+
+/* ===== SECTIONS ===== */
+section {
+  background: var(--white);
+  border-radius: 16px;
+  padding: 0;
+  margin-bottom: 20px;
+  border: 1px solid var(--gray-200);
+  overflow: hidden;
+  transition: box-shadow 0.2s;
+}
+section:hover { box-shadow: 0 4px 20px rgba(0,0,0,0.06); }
+
+.section-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 20px 28px;
+  border-bottom: 1px solid var(--gray-100);
+  cursor: pointer;
+  user-select: none;
+}
+.section-num {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--primary);
+  color: var(--white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.85em;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+.section-header h2 {
+  font-size: 1.05em;
+  font-weight: var(--heading-weight, 700);
+  color: var(--primary);
+  text-transform: var(--heading-transform, uppercase);
+  letter-spacing: 1.5px;
+  flex: 1;
+}
+.section-badge {
+  font-size: 0.65em;
+  padding: 3px 10px;
+  border-radius: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+}
+.badge-verify { background: var(--green-bg); color: var(--green-border); }
+.badge-fill { background: #fff3e0; color: #e65100; }
+.badge-mixed { background: var(--accent-light); color: var(--accent); }
+
+.section-body { padding: 24px 28px 28px; }
+
+/* ===== INFO BOX ===== */
+.info-box {
+  background: var(--blue-bg);
+  border-radius: 10px;
+  padding: 18px 20px;
+  margin-bottom: 22px;
+  font-size: 0.88em;
+  border: 1px solid #d6e4f0;
+}
+.info-box h4 {
+  color: var(--primary);
+  font-size: 0.78em;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.info-box h4::before {
+  content: 'i';
+  display: inline-flex;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--primary);
+  color: white;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75em;
+  font-weight: 700;
+  font-style: italic;
+}
+.info-box p { color: var(--gray-700); }
+
+/* ===== SUGGESTED ANSWER ===== */
+.suggested {
+  background: var(--green-bg);
+  border-radius: 10px;
+  padding: 18px 20px;
+  margin-bottom: 12px;
+  border: 1px solid #c8e6c9;
+}
+.suggested h4 {
+  color: var(--green-border);
+  font-size: 0.72em;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.suggested h4::before {
+  content: '\2713';
+  display: inline-flex;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--green-border);
+  color: white;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.7em;
+}
+.suggested p { font-size: 0.88em; color: var(--gray-700); margin-bottom: 6px; }
+.suggested p:last-child { margin-bottom: 0; }
+.suggested strong { color: var(--primary); }
+
+/* ===== VERIFY CHECKBOX ===== */
+.verify {
+  margin-bottom: 22px;
+  padding: 14px 18px;
+  background: var(--gray-50);
+  border-radius: 10px;
+  border: 1px solid var(--gray-200);
+}
+.verify-top {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.verify-top input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  accent-color: var(--accent);
+  flex-shrink: 0;
+  cursor: pointer;
+}
+.verify-top label {
+  font-weight: 600;
+  font-size: 0.9em;
+  color: var(--primary);
+  cursor: pointer;
+}
+.verify textarea {
+  width: 100%;
+  min-height: 48px;
+  padding: 10px 14px;
+  border: 1.5px solid var(--gray-200);
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: 0.88em;
+  resize: vertical;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  margin-top: 10px;
+  background: var(--white);
+}
+.verify textarea:focus { border-color: var(--accent); outline: none; box-shadow: 0 0 0 3px rgba(var(--accent-rgb, 203,0,124), 0.1); }
+.verify textarea::placeholder { color: #aaa; }
+
+/* ===== OPEN QUESTION ===== */
+.question { margin-bottom: 22px; }
+.question label {
+  display: block;
+  font-weight: 600;
+  font-size: 0.92em;
+  margin-bottom: 8px;
+  color: var(--primary);
+}
+.question textarea {
+  width: 100%;
+  min-height: 76px;
+  padding: 14px 16px;
+  border: 1.5px solid var(--gray-200);
+  border-radius: 10px;
+  font-family: inherit;
+  font-size: 0.9em;
+  resize: vertical;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  background: var(--white);
+}
+.question textarea:focus { border-color: var(--accent); outline: none; box-shadow: 0 0 0 3px rgba(var(--accent-rgb, 203,0,124), 0.1); }
+.question textarea::placeholder { color: #aaa; }
+
+/* ===== TABLES ===== */
+table { width: 100%; border-collapse: collapse; margin-bottom: 14px; font-size: 0.88em; border-radius: 8px; overflow: hidden; }
+th { background: var(--primary); color: var(--white); padding: 11px 14px; text-align: left; font-weight: 600; font-size: 0.82em; text-transform: uppercase; letter-spacing: 0.8px; }
+td { padding: 11px 14px; border-bottom: 1px solid var(--gray-100); }
+tr:last-child td { border-bottom: none; }
+tr:nth-child(even) td { background: var(--gray-50); }
+
+/* ===== SECTION NOTE ===== */
+.section-note {
+  font-size: 0.85em;
+  color: var(--gray-500);
+  font-style: italic;
+  margin-bottom: 20px;
+  padding-left: 2px;
+}
+
+/* ===== REPORT-SPECIFIC ===== */
+.report-body { padding: 36px 40px; }
+.report-body h3 {
+  color: var(--primary);
+  font-size: 1.1em;
+  font-weight: var(--heading-weight, 700);
+  text-transform: var(--heading-transform, uppercase);
+  letter-spacing: 1.5px;
+  margin: 36px 0 16px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid var(--gray-200);
+}
+.report-body h3:first-child { margin-top: 0; }
+.report-body h4 {
+  color: var(--primary);
+  font-size: 0.95em;
+  font-weight: 600;
+  margin: 24px 0 10px;
+}
+.report-body p { margin-bottom: 12px; font-size: 0.95em; color: var(--gray-700); line-height: 1.7; }
+.report-body ul, .report-body ol { margin: 10px 0 20px 24px; font-size: 0.95em; color: var(--gray-700); }
+.report-body li { margin-bottom: 8px; line-height: 1.65; }
+.report-body hr { border: none; height: 1px; background: var(--gray-200); margin: 32px 0; }
+.report-body blockquote {
+  border-left: 4px solid var(--accent);
+  background: var(--gray-50);
+  padding: 16px 22px;
+  margin: 20px 0;
+  border-radius: 0 8px 8px 0;
+  font-style: italic;
+  color: var(--gray-700);
+}
+
+/* Report tables get extra room */
+.report-body table { margin: 16px 0 24px; font-size: 0.9em; }
+.report-body th { padding: 13px 16px; font-size: 0.8em; letter-spacing: 1px; }
+.report-body td { padding: 13px 16px; }
+
+/* ===== CALLOUT BOXES ===== */
+.callout {
+  border-radius: 10px;
+  padding: 18px 20px;
+  margin: 16px 0;
+  font-size: 0.88em;
+}
+.callout-key { background: var(--accent-light); border: 1px solid var(--accent); }
+.callout-key h4 { color: var(--accent); }
+.callout-info { background: var(--blue-bg); border: 1px solid #d6e4f0; }
+.callout-info h4 { color: var(--primary); }
+.callout-success { background: var(--green-bg); border: 1px solid #c8e6c9; }
+.callout-success h4 { color: var(--green-border); }
+.callout h4 {
+  font-size: 0.78em;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+}
+.callout p { color: var(--gray-700); margin-bottom: 4px; }
+
+/* ===== FOOTER ACTIONS ===== */
+.actions {
+  text-align: center;
+  padding: 36px 0 0;
+}
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 36px;
+  font-size: 0.85em;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s;
+  border: 2px solid transparent;
+}
+.btn-primary { background: var(--accent); color: var(--white); border-color: var(--accent); }
+.btn-primary:hover { background: var(--accent-dark); border-color: var(--accent-dark); }
+.btn-outline { background: transparent; color: var(--primary); border-color: var(--primary); margin-left: 12px; }
+.btn-outline:hover { background: var(--primary); color: var(--white); }
+
+.footer-nav {
+  text-align: center;
+  padding: 8px 0 0;
+}
+.footer-nav a {
+  color: var(--primary);
+  text-decoration: none;
+  font-size: 0.82em;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 24px;
+  border: 1.5px solid var(--gray-200);
+  border-radius: 8px;
+  transition: all 0.2s;
+}
+.footer-nav a:hover {
+  border-color: var(--primary);
+  background: var(--gray-50);
+}
+
+.footer-note {
+  text-align: center;
+  color: var(--gray-500);
+  font-size: 0.75em;
+  padding: 16px 0 40px;
+  letter-spacing: 0.5px;
+}
+
+/* ===== DIVIDER ===== */
+.divider {
+  height: 1px;
+  background: var(--gray-200);
+  margin: 20px 0;
+}
+
+/* ===== PRINT ===== */
+
+/* Remove browser default headers/footers (date, URL, page#) */
+@page {
+  margin: 0.4in 0.5in;
+  size: letter;
+}
+
+@media print {
+  /* Force backgrounds to print (navy hero, table headers, etc.) */
+  * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    color-adjust: exact !important;
+  }
+
+  body {
+    background: white;
+    font-size: 12pt;
+    margin: 0;
+    padding: 0;
+  }
+
+  /* Keep the hero but make it compact and branded */
+  .hero {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 50%, var(--primary) 100%) !important;
+    color: white !important;
+    margin: 0 -0.5in;
+    padding: 28px 0.5in 18px;
+    width: calc(100% + 1in);
+    overflow: visible !important;
+  }
+  .hero::after { display: none; }
+  .hero h1 { font-size: 1.4em; margin-bottom: 4px; color: white !important; }
+  .hero p { color: rgba(255,255,255,0.7) !important; font-size: 0.85em; }
+  .hero .accent { color: var(--accent) !important; }
+  .hero-logo { width: 60px; height: 60px; margin-bottom: 10px; }
+
+  /* Hide interactive/nav elements */
+  .top-nav { display: none !important; }
+  .progress-wrap { display: none !important; }
+  .actions { display: none !important; }
+  .footer-nav { display: none !important; }
+
+  /* Container resets */
+  .container,
+  .container.container--wide {
+    max-width: 100%;
+    padding: 16px 0 0;
+    margin: 0;
+  }
+
+  /* Report body — tighter for print */
+  .report-body {
+    padding: 8px 0 0;
+  }
+  .report-body h3 {
+    font-size: 11pt;
+    margin: 20px 0 8px;
+    padding-bottom: 6px;
+    color: var(--primary) !important;
+  }
+  .report-body h4 {
+    font-size: 10pt;
+    margin: 14px 0 6px;
+    color: var(--primary) !important;
+  }
+  .report-body p { font-size: 10pt; margin-bottom: 6px; line-height: 1.5; }
+  .report-body ul, .report-body ol { font-size: 10pt; margin: 6px 0 12px 20px; }
+  .report-body li { margin-bottom: 4px; line-height: 1.5; }
+  .report-body hr { margin: 18px 0; }
+  .report-body blockquote {
+    padding: 10px 14px;
+    margin: 12px 0;
+    border-left-color: var(--accent) !important;
+    background: #f8f8f8 !important;
+  }
+
+  /* Tables — keep navy headers */
+  table { font-size: 9pt; margin: 10px 0 16px; page-break-inside: avoid; }
+  th {
+    background: var(--primary) !important;
+    color: white !important;
+    padding: 8px 10px;
+    font-size: 8pt;
+  }
+  td { padding: 8px 10px; }
+  tr:nth-child(even) td { background: #f5f5f5 !important; }
+
+  /* Sections (questionnaire) */
+  section {
+    border: 1px solid #ddd;
+    box-shadow: none !important;
+    page-break-inside: avoid;
+    margin-bottom: 12px;
+  }
+  .section-num {
+    background: var(--primary) !important;
+    color: white !important;
+  }
+  .section-header h2 { color: var(--primary) !important; }
+  .section-badge { border: 1px solid currentColor; }
+
+  /* Suggested/info boxes keep color */
+  .suggested {
+    background: #f0f9f0 !important;
+    border-color: #c8e6c9 !important;
+  }
+  .suggested h4 { color: #34a853 !important; }
+  .suggested h4::before { background: #34a853 !important; color: white !important; }
+  .info-box { background: #eef4fb !important; border-color: #d6e4f0 !important; }
+  .info-box h4 { color: var(--primary) !important; }
+  .info-box h4::before { background: var(--primary) !important; color: white !important; }
+
+  /* Textareas visible for print-and-fill */
+  textarea { border: 1px solid #ccc !important; min-height: 50px !important; }
+  .verify-top input[type="checkbox"] { accent-color: var(--accent) !important; }
+
+  /* Intro card */
+  .intro { border: 1px solid #ddd; page-break-inside: avoid; }
+  .intro::before { background: linear-gradient(90deg, var(--accent), var(--primary)) !important; }
+  .stat .num { color: var(--primary) !important; }
+
+  /* Footer */
+  .footer-note { padding: 12px 0 0; font-size: 8pt; }
+
+  /* Prevent orphaned headings */
+  h3, h4 { page-break-after: avoid; }
+  ul, ol, table, blockquote { page-break-inside: avoid; }
+}
+
+</style>
+</head>
+<body>
+
+<div class="top-nav">
+  <a href="index.html"><span class="nav-arrow">&larr;</span> Back to Portal</a>
+  <span class="nav-brand">NuLite</span>
+</div>
+
+<div class="hero">
+  <div class="hero-logo"><img src="https://www.electricboatsboston.com/wp-content/uploads/2020/11/BEB-LOGO-2-1-2048x2048-1-e1626885368128-300x300.png" alt="Boston Electric Boats"></div>
+  <h1>Boston Electric Boats</h1>
+  <p>Parking & Transit Guide</p>
+</div>
+
+<div class="container container--wide">
+  <div class="report-body">
+    <blockquote>
+<p>Research compiled for Boston Electric Boats customer FAQ.</p>
+<p>Date: 2026-03-19. <strong>Rates are approximate and should be verified before publishing.</strong></p>
+</blockquote>
+<hr>
+<h3>1. Parking Garages & Lots Nearby</h3>
+<h4>On-Site / Closest</h4>
+<table>
+<tr><th>Name</th><th>Address</th><th>Distance</th><th>Approx. Rate</th><th>Notes</th></tr>
+<tr><td><strong>Lewis Wharf Parking</strong></td><td>641 Lewis Wharf (entrance on Atlantic Ave)</td><td>On-site</td><td>~$15-25/day</td><td>Small lot; attendants may need to move cars. Can fill up on busy days. Rating: 2.2/5 on Parkopedia.</td></tr>
+<tr><td><strong>Sargent's Wharf Lot</strong></td><td>269 Commercial St</td><td>~1 min walk (~125 ft)</td><td>~$19-30/day (weekday ~$19, weekend ~$24)</td><td>Open 24/7. Self-park. Handicap accessible. Oversize vehicles OK. No in/out privileges. Operated by Propark.</td></tr>
+<tr><td><strong>290 Commercial St Lot</strong></td><td>290 Commercial St</td><td>~2 min walk</td><td>~$29/day</td><td>Outdoor lot. Bookable on SpotHero/ParkWhiz.</td></tr>
+</table>
+<h4>Within 5-Minute Walk</h4>
+<table>
+<tr><th>Name</th><th>Address</th><th>Distance</th><th>Approx. Rate</th><th>Notes</th></tr>
+<tr><td><strong>Battery Wharf Garage</strong></td><td>2 Battery Wharf</td><td>~0.2 mi (~4 min walk)</td><td>~$25/day</td><td>Underground, valet-assist.</td></tr>
+<tr><td><strong>Dock Square Garage</strong></td><td>20 New Sudbury St</td><td>~0.3 mi (~5 min walk)</td><td>$9 (0-20 min), $18 (20-40 min), $28 (40-60 min), $40 max/day</td><td>Early bird special available (arrive before 8 AM). Operated by LAZ Parking.</td></tr>
+<tr><td><strong>Boston Harbor Garage</strong></td><td>70 East India Row</td><td>~0.3 mi (~5 min walk)</td><td>~$25-28/day; early bird $15 (arrive 5-8:30 AM, depart after 4 PM)</td><td>Can be expensive for short stays ($37 for 3 hrs reported).</td></tr>
+</table>
+<h4>Within 10-Minute Walk</h4>
+<table>
+<tr><th>Name</th><th>Address</th><th>Distance</th><th>Approx. Rate</th><th>Notes</th></tr>
+<tr><td><strong>North End Garage</strong></td><td>600 Commercial St</td><td>~0.4 mi (~8 min walk)</td><td>$8 (0-30 min), $14 (30-60 min), $22 (90 min-2 hrs), $26 (2-10 hrs), $36 (10-24 hrs)</td><td>Operated by Pilgrim Parking. Detailed hourly tiers.</td></tr>
+<tr><td><strong>Government Center Garage</strong></td><td>50 New Sudbury St</td><td>~0.5 mi (~9 min walk)</td><td>~$38/day</td><td>Large garage. Event rate: $40.</td></tr>
+</table>
+<h4>Budget Tips</h4>
+<ul>
+<li><strong>Pre-book online</strong> via <a href="https://spothero.com" target="_blank">SpotHero</a>, <a href="https://www.parkwhiz.com" target="_blank">ParkWhiz</a>, or <a href="https://www.bestparking.com" target="_blank">BestParking</a> for discounted rates (often 30-50% off walk-up prices).</li>
+<li><strong>Early bird specials</strong> at Dock Square Garage and Boston Harbor Garage can save significantly.</li>
+<li><strong>Sargent's Wharf</strong> and the <strong>Lewis Wharf lot</strong> are the closest options and often cheapest for a full day.</li>
+</ul>
+<hr>
+<h3>2. Public Transit (MBTA / "The T")</h3>
+<h4>Nearest Subway Station: Aquarium (Blue Line)</h4>
+<ul>
+<li><strong>Line</strong>: Blue Line</li>
+<li><strong>Address</strong>: State Street at Atlantic Avenue (under the surface)</li>
+<li><strong>Walking distance to Lewis Wharf</strong>: Approximately 0.4 miles / <strong>5-7 minute walk</strong> north along Atlantic Avenue</li>
+<li><strong>Walking directions</strong>:</li>
+</ul>
+<p>  1. Exit Aquarium station onto Atlantic Avenue</p>
+<p>  2. Turn right (north) and walk along Atlantic Avenue</p>
+<p>  3. Pass Long Wharf and Commercial Wharf on your right</p>
+<p>  4. Lewis Wharf / 28 Atlantic Ave will be on your right</p>
+<ul>
+<li><strong>Connections</strong>: The Blue Line connects to the Orange Line at State Street station and the Green Line at Government Center (both one stop away)</li>
+</ul>
+<h4>Alternative Station: Haymarket (Orange Line + Green Line)</h4>
+<ul>
+<li><strong>Lines</strong>: Orange Line, Green Line</li>
+<li><strong>Address</strong>: New Sudbury Street at Congress Street</li>
+<li><strong>Walking distance to Lewis Wharf</strong>: Approximately 0.5 miles / <strong>8-10 minute walk</strong></li>
+<li><strong>Walking directions</strong>:</li>
+</ul>
+<p>  1. Exit Haymarket station</p>
+<p>  2. Walk east on New Sudbury Street toward the waterfront</p>
+<p>  3. Turn right (south) on Atlantic Avenue</p>
+<p>  4. Lewis Wharf / 28 Atlantic Ave will be on your left</p>
+<ul>
+<li><strong>Bonus</strong>: Haymarket station is right next to the famous Haymarket open-air produce market (Fri/Sat) and Faneuil Hall / Quincy Market</li>
+</ul>
+<h4>Bus Service</h4>
+<ul>
+<li><strong>Nearest bus stop</strong>: Atlantic Ave @ Commercial Wharf (MBTA stop #30235) -- essentially at Lewis Wharf</li>
+<li><strong>Useful routes</strong>: Several bus routes run along Atlantic Avenue</li>
+<li><strong>SL4 (Silver Line)</strong>: Runs along the waterfront corridor</li>
+</ul>
+<h4>Commuter Rail</h4>
+<ul>
+<li><strong>North Station</strong> is approximately 0.7 miles / 12-15 minute walk from Lewis Wharf</li>
+<li>Serves the Fitchburg, Haverhill, Lowell, and Newburyport/Rockport commuter rail lines</li>
+<li>Walking: Head west on Commercial St, then north on Causeway St</li>
+</ul>
+<h4>Ferry</h4>
+<ul>
+<li><strong>Long Wharf</strong> (a few wharves south) has ferry service to Charlestown Navy Yard, the Harbor Islands, and other destinations</li>
+</ul>
+<hr>
+<h3>3. Street Parking</h3>
+<h4>Metered Parking on Atlantic Avenue</h4>
+<ul>
+<li><strong>Location</strong>: Meters exist along Atlantic Avenue between The Sail Loft restaurant and Sargent's Wharf (directly in the Lewis Wharf area)</li>
+<li><strong>Time limit</strong>: 2 hours maximum</li>
+<li><strong>Active hours</strong>: Monday-Saturday, 8:00 AM - 6:00 PM</li>
+<li><strong>Rate</strong>: Standard Boston meter rate (~$1.25/hr, varies by zone)</li>
+<li><strong>Payment</strong>: Coins, credit/debit cards, or the <strong>ParkBoston app</strong></li>
+<li><strong>CRITICAL</strong>: These meters convert to <strong>resident-only parking from 6:00 PM to 8:00 AM</strong>. You will be ticketed/towed if parked during resident hours without a permit.</li>
+</ul>
+<h4>Sundays & Holidays</h4>
+<ul>
+<li><strong>All Boston parking meters are FREE on Sundays</strong> -- no time limits apply</li>
+<li>Meters are also free on major holidays</li>
+</ul>
+<h4>Other Nearby Metered Streets</h4>
+<ul>
+<li><strong>North Washington Street</strong> (between Cooper St and Charlestown Bridge): Meters here are open to anyone 24/7, making them more flexible for evening/night use</li>
+<li><strong>Commercial Street</strong>: Some metered spots, check posted signs</li>
+</ul>
+<h4>Street Parking Tips</h4>
+<p>1. <strong>Arrive early</strong> -- street spots near the waterfront fill up fast, especially in summer</p>
+<p>2. <strong>Read the signs carefully</strong> -- many spots switch between meter and resident-only at different times</p>
+<p>3. <strong>Download the ParkBoston app</strong> before arriving to avoid fumbling with the meter</p>
+<p>4. <strong>2-hour limit</strong> makes street parking impractical for longer boat rentals -- use a garage instead</p>
+<p>5. <strong>Summer weekends</strong> are the hardest time to find street parking in the North End waterfront area</p>
+<p>6. <strong>Street cleaning</strong>: Watch for posted street cleaning schedules, which temporarily prohibit parking</p>
+<hr>
+<h3>4. Recommended Options by Scenario</h3>
+<table>
+<tr><th>Scenario</th><th>Best Option</th></tr>
+<tr><td><strong>Quick trip (< 2 hours)</strong></td><td>Street meters on Atlantic Ave (free on Sundays) or Lewis Wharf lot</td></tr>
+<tr><td><strong>Half-day boat rental</strong></td><td>Sargent's Wharf Lot (~$19) or pre-book Dock Square Garage online</td></tr>
+<tr><td><strong>Full day on the water</strong></td><td>Pre-book via SpotHero for best rate; Sargent's Wharf or Lewis Wharf lot</td></tr>
+<tr><td><strong>Evening departure</strong></td><td>North End Garage or Battery Wharf Garage (avoid Atlantic Ave meters -- they become resident-only at 6 PM)</td></tr>
+<tr><td><strong>Coming by T</strong></td><td>Blue Line to Aquarium station (5-7 min walk)</td></tr>
+<tr><td><strong>Coming from North Shore</strong></td><td>Commuter rail to North Station (12-15 min walk) or Blue Line to Aquarium</td></tr>
+<tr><td><strong>Coming from South Shore</strong></td><td>Red Line to Downtown Crossing, transfer to Blue Line to Aquarium</td></tr>
+<tr><td><strong>Arriving by car, budget-conscious</strong></td><td>Early bird at Dock Square ($9 before 8 AM) or Boston Harbor Garage ($15 early bird)</td></tr>
+</table>
+<hr>
+<h3>Sources & Verification Links</h3>
+<ul>
+<li><a href="https://en.parkopedia.com/parking/lot/lewis_wharf/02110/boston/" target="_blank">Lewis Wharf Parking - Parkopedia</a></li>
+<li><a href="https://www.yelp.com/biz/lewis-wharf-parking-boston" target="_blank">Lewis Wharf Parking - Yelp</a></li>
+<li><a href="https://en.parkopedia.com/parking/lot/sargents_wharf_lot/02110/boston/" target="_blank">Sargent's Wharf Lot - Parkopedia</a></li>
+<li><a href="https://spothero.com/destination/boston/sargents-wharf-parking" target="_blank">Sargent's Wharf - SpotHero</a></li>
+<li><a href="https://en.parkopedia.com/parking/garage/dock_square_garage/02109/boston/" target="_blank">Dock Square Garage - Parkopedia</a></li>
+<li><a href="https://en.parkopedia.com/parking/garage/boston_harbor_garage/02110/boston/" target="_blank">Boston Harbor Garage - Parkopedia</a></li>
+<li><a href="https://www.pilgrimparking.com/boston-parking-garages/north-end-garage" target="_blank">North End Garage - Pilgrim Parking</a></li>
+<li><a href="https://governmentcentergarage.com/rates/" target="_blank">Government Center Garage - Official Rates</a></li>
+<li><a href="https://www.mbta.com/stops/place-aqucl" target="_blank">Aquarium Station - MBTA</a></li>
+<li><a href="https://www.mbta.com/stops/place-haecl" target="_blank">Haymarket Station - MBTA</a></li>
+<li><a href="https://www.boston.gov/departments/parking-clerk/how-do-parking-meters-work" target="_blank">Boston Parking Meters - Boston.gov</a></li>
+<li><a href="https://northendwaterfront.com/2017/04/new-neighborhood-visitor-metered-parking-map/" target="_blank">North End Metered Parking Map - NorthEndWaterfront.com</a></li>
+<li><a href="https://www.spotangels.com/blog/complete-boston-street-parking-guide/" target="_blank">Boston Street Parking Guide - SpotAngels</a></li>
+<li><a href="https://spothero.com/destination/boston/waterfront-parking" target="_blank">SpotHero - Boston Waterfront</a></li>
+<li><a href="https://www.parkwhiz.com/lewis-wharf-parking-parking/" target="_blank">ParkWhiz - Lewis Wharf</a></li>
+</ul>
+
+  </div>
+
+  <div class="actions">
+    <button class="btn btn-primary" onclick="window.print()">Print / Save as PDF</button>
+  </div>
+  <div class="footer-nav">
+    <a href="index.html"><span>&larr;</span> Back to Portal</a>
+  </div>
+  <p class="footer-note">Prepared by NuLite &bull; March 2026</p>
+</div>
+
+</body>
+</html>

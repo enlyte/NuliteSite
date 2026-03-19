@@ -1,11 +1,271 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="refresh" content="0;url=/vidcutai/">
-    <title>Redirecting...</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nulite</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: #0a0a0a;
+    color: #e8e8e8;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  /* Subtle animated gradient background */
+  .bg-glow {
+    position: fixed;
+    top: -40%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 800px;
+    height: 800px;
+    background: radial-gradient(circle, rgba(99,102,241,0.08) 0%, rgba(139,92,246,0.04) 40%, transparent 70%);
+    pointer-events: none;
+    animation: pulse 8s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 0.6; transform: translateX(-50%) scale(1); }
+    50% { opacity: 1; transform: translateX(-50%) scale(1.1); }
+  }
+
+  /* Grid pattern overlay */
+  .bg-grid {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none;
+  }
+
+  .page {
+    position: relative;
+    z-index: 1;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 24px;
+  }
+
+  .container {
+    text-align: center;
+    max-width: 640px;
+  }
+
+  /* Logo */
+  .logo-mark {
+    width: 72px;
+    height: 72px;
+    border-radius: 18px;
+    background: linear-gradient(135deg, #6366f1, #8b5cf6, #a78bfa);
+    margin: 0 auto 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 30px;
+    font-weight: 700;
+    color: white;
+    letter-spacing: -1px;
+    box-shadow: 0 8px 32px rgba(99,102,241,0.25), 0 0 0 1px rgba(99,102,241,0.1);
+  }
+
+  h1 {
+    font-size: 3.2em;
+    font-weight: 700;
+    letter-spacing: -2px;
+    margin-bottom: 16px;
+    background: linear-gradient(135deg, #ffffff 0%, #a0a0a0 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .tagline {
+    font-size: 1.15em;
+    color: #777;
+    font-weight: 400;
+    line-height: 1.7;
+    margin-bottom: 16px;
+  }
+
+  .coming-soon {
+    display: inline-block;
+    padding: 6px 18px;
+    border-radius: 20px;
+    background: rgba(99,102,241,0.1);
+    border: 1px solid rgba(99,102,241,0.2);
+    color: #8b8bf5;
+    font-size: 0.72em;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 48px;
+  }
+
+  /* Divider */
+  .divider {
+    width: 48px;
+    height: 1px;
+    background: #2a2a2a;
+    margin: 0 auto 36px;
+  }
+
+  /* Product cards */
+  .products {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    align-items: center;
+    margin-bottom: 40px;
+  }
+
+  .product {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 18px 28px;
+    border: 1px solid #1a1a1a;
+    border-radius: 14px;
+    color: #ccc;
+    text-decoration: none;
+    width: 340px;
+    background: rgba(255,255,255,0.015);
+    transition: all 0.25s;
+    text-align: left;
+  }
+  .product:hover {
+    border-color: #6366f1;
+    background: rgba(99,102,241,0.05);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(99,102,241,0.1);
+  }
+
+  .product-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    flex-shrink: 0;
+  }
+  .product-icon.portal { background: rgba(59,130,246,0.12); color: #60a5fa; }
+  .product-icon.vidcut { background: rgba(244,63,94,0.12); color: #fb7185; }
+  .product-icon.converge { background: rgba(16,185,129,0.12); color: #34d399; }
+  .product-icon.safebot { background: rgba(251,191,36,0.12); color: #fbbf24; }
+
+  .product-info { flex: 1; }
+  .product-name {
+    font-weight: 600;
+    font-size: 0.92em;
+    color: #e0e0e0;
+    margin-bottom: 2px;
+  }
+  .product-desc {
+    font-size: 0.75em;
+    color: #666;
+  }
+  .product-badge {
+    font-size: 0.6em;
+    padding: 3px 8px;
+    border-radius: 6px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    flex-shrink: 0;
+  }
+  .badge-live { background: rgba(16,185,129,0.12); color: #34d399; }
+  .badge-soon { background: rgba(255,255,255,0.05); color: #555; }
+
+  .arrow {
+    color: #444;
+    font-size: 0.9em;
+    transition: color 0.2s, transform 0.2s;
+    flex-shrink: 0;
+  }
+  .product:hover .arrow { color: #6366f1; transform: translateX(3px); }
+
+  /* Footer */
+  .footer {
+    color: #333;
+    font-size: 0.7em;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+  }
+  .footer a { color: #444; text-decoration: none; }
+  .footer a:hover { color: #6366f1; }
+</style>
 </head>
 <body>
-    <p>If you are not redirected automatically, follow this <a href="/vidcutai/">link to VidCutAI</a>.</p>
+
+<div class="bg-glow"></div>
+<div class="bg-grid"></div>
+
+<div class="page">
+  <div class="container">
+    <div class="logo-mark">N</div>
+    <h1>nulite</h1>
+    <p class="tagline">Intelligent tools for modern businesses.</p>
+    <div class="coming-soon">Coming Soon</div>
+
+    <div class="divider"></div>
+
+    <div class="products">
+      <a href="/clients/beb/" class="product">
+        <div class="product-icon portal">&#9670;</div>
+        <div class="product-info">
+          <div class="product-name">Client Portal</div>
+          <div class="product-desc">Branded deliverables & collaboration</div>
+        </div>
+        <span class="product-badge badge-live">Live</span>
+        <span class="arrow">&rarr;</span>
+      </a>
+
+      <a href="/vidcutai/" class="product">
+        <div class="product-icon vidcut">&#9654;</div>
+        <div class="product-info">
+          <div class="product-name">VidCutAI</div>
+          <div class="product-desc">AI-powered video editing</div>
+        </div>
+        <span class="product-badge badge-live">Live</span>
+        <span class="arrow">&rarr;</span>
+      </a>
+
+      <span class="product" style="cursor: default;">
+        <div class="product-icon converge">&#9673;</div>
+        <div class="product-info">
+          <div class="product-name">Converge</div>
+          <div class="product-desc">Intelligence & context layer</div>
+        </div>
+        <span class="product-badge badge-soon">Soon</span>
+        <span class="arrow" style="opacity:0.2;">&rarr;</span>
+      </span>
+
+      <span class="product" style="cursor: default;">
+        <div class="product-icon safebot">&#9737;</div>
+        <div class="product-info">
+          <div class="product-name">SafeBot</div>
+          <div class="product-desc">Verification & secure integrations</div>
+        </div>
+        <span class="product-badge badge-soon">Soon</span>
+        <span class="arrow" style="opacity:0.2;">&rarr;</span>
+      </span>
+    </div>
+  </div>
+
+  <div class="footer">nulite.org</div>
+</div>
+
 </body>
 </html>

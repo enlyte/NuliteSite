@@ -1,0 +1,930 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Boston Electric Boats &mdash; Customer Experience Guide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+:root {
+    --primary: #001e48;
+    --primary-light: #002a6b;
+    --accent: #cb007c;
+    --accent-dark: #a30064;
+    --accent-light: #f5e0ef;
+    --accent-glow: #ff4dc9;
+    --heading-transform: uppercase;
+    --heading-spacing: 3px;
+    --heading-weight: 700;
+    --font-family: 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  }
+/* ClientPortal — Base CSS Template
+ *
+ * All colors reference CSS custom properties set per-client.
+ * The build script injects :root variables from the client config.
+ *
+ * Required custom properties (set by build):
+ *   --primary, --primary-light, --accent, --accent-dark, --accent-light
+ *   --heading-transform, --heading-spacing, --heading-weight
+ */
+
+/* ===== FOUNDATIONS ===== */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: var(--font-family, 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif);
+  background: var(--gray-50);
+  color: #1a1a2e;
+  line-height: 1.65;
+  font-size: 15px;
+  -webkit-font-smoothing: antialiased;
+}
+
+:root {
+  /* Neutrals (shared across all clients) */
+  --white: #ffffff;
+  --gray-50: #f8f9fb;
+  --gray-100: #f0f2f5;
+  --gray-200: #e2e5ea;
+  --gray-300: #d2d2d2;
+  --gray-500: #777;
+  --gray-700: #444;
+  --charcoal: #0f0f0f;
+  --green-bg: #f0f9f0;
+  --green-border: #34a853;
+  --blue-bg: #eef4fb;
+}
+
+/* ===== TOP NAV ===== */
+.top-nav {
+  background: var(--charcoal);
+  padding: 10px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.top-nav a {
+  color: rgba(255,255,255,0.7);
+  text-decoration: none;
+  font-size: 0.78em;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: color 0.2s;
+}
+.top-nav a:hover { color: var(--white); }
+.top-nav .nav-arrow { font-size: 1.1em; }
+.top-nav .nav-brand {
+  color: rgba(255,255,255,0.4);
+  font-size: 0.68em;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  font-weight: 600;
+}
+
+/* ===== HERO HEADER ===== */
+.hero {
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 50%, var(--primary) 100%);
+  color: var(--white);
+  padding: 48px 24px 44px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.hero::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  right: 0;
+  height: 40px;
+  background: var(--gray-50);
+  clip-path: ellipse(55% 100% at 50% 100%);
+}
+.hero-logo {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  margin: 0 auto 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.hero-logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.hero h1 {
+  font-size: 1.7em;
+  font-weight: var(--heading-weight, 700);
+  text-transform: var(--heading-transform, uppercase);
+  letter-spacing: var(--heading-spacing, 3px);
+  margin-bottom: 6px;
+}
+.hero p {
+  color: var(--gray-300);
+  font-size: 0.95em;
+  font-weight: 400;
+}
+.hero .accent { color: var(--accent); }
+
+/* ===== PROGRESS BAR ===== */
+.progress-wrap {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--white);
+  border-bottom: 1px solid var(--gray-200);
+  padding: 10px 24px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
+.progress-bar {
+  flex: 1;
+  height: 6px;
+  background: var(--gray-200);
+  border-radius: 3px;
+  overflow: hidden;
+}
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent), var(--accent-glow, var(--accent)));
+  border-radius: 3px;
+  width: 0%;
+  transition: width 0.4s ease;
+}
+.progress-text {
+  font-size: 0.75em;
+  color: var(--gray-500);
+  font-weight: 600;
+  white-space: nowrap;
+  min-width: 90px;
+  text-align: right;
+}
+
+/* ===== LAYOUT ===== */
+.container { max-width: 760px; margin: 0 auto; padding: 24px 20px 60px; }
+.container.container--wide { max-width: 960px; padding: 32px 28px 60px; }
+
+/* ===== INTRO CARD ===== */
+.intro {
+  background: var(--white);
+  border-radius: 16px;
+  padding: 28px 28px 24px;
+  margin-bottom: 28px;
+  border: 1px solid var(--gray-200);
+  position: relative;
+  overflow: hidden;
+}
+.intro::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--accent), var(--primary));
+}
+.intro h3 {
+  color: var(--primary);
+  font-size: 1.1em;
+  margin-bottom: 10px;
+}
+.intro p { margin-bottom: 8px; font-size: 0.92em; color: var(--gray-700); }
+.intro .highlight { color: var(--accent); font-weight: 600; }
+
+.stat-row {
+  display: flex;
+  gap: 12px;
+  margin-top: 16px;
+}
+.stat {
+  flex: 1;
+  text-align: center;
+  padding: 12px 8px;
+  background: var(--gray-50);
+  border-radius: 10px;
+  border: 1px solid var(--gray-200);
+}
+.stat .num { font-size: 1.5em; font-weight: 700; color: var(--primary); }
+.stat .lbl { font-size: 0.7em; color: var(--gray-500); text-transform: uppercase; letter-spacing: 1px; margin-top: 2px; }
+
+/* ===== SECTIONS ===== */
+section {
+  background: var(--white);
+  border-radius: 16px;
+  padding: 0;
+  margin-bottom: 20px;
+  border: 1px solid var(--gray-200);
+  overflow: hidden;
+  transition: box-shadow 0.2s;
+}
+section:hover { box-shadow: 0 4px 20px rgba(0,0,0,0.06); }
+
+.section-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 20px 28px;
+  border-bottom: 1px solid var(--gray-100);
+  cursor: pointer;
+  user-select: none;
+}
+.section-num {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--primary);
+  color: var(--white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.85em;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+.section-header h2 {
+  font-size: 1.05em;
+  font-weight: var(--heading-weight, 700);
+  color: var(--primary);
+  text-transform: var(--heading-transform, uppercase);
+  letter-spacing: 1.5px;
+  flex: 1;
+}
+.section-badge {
+  font-size: 0.65em;
+  padding: 3px 10px;
+  border-radius: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+}
+.badge-verify { background: var(--green-bg); color: var(--green-border); }
+.badge-fill { background: #fff3e0; color: #e65100; }
+.badge-mixed { background: var(--accent-light); color: var(--accent); }
+
+.section-body { padding: 24px 28px 28px; }
+
+/* ===== INFO BOX ===== */
+.info-box {
+  background: var(--blue-bg);
+  border-radius: 10px;
+  padding: 18px 20px;
+  margin-bottom: 22px;
+  font-size: 0.88em;
+  border: 1px solid #d6e4f0;
+}
+.info-box h4 {
+  color: var(--primary);
+  font-size: 0.78em;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.info-box h4::before {
+  content: 'i';
+  display: inline-flex;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--primary);
+  color: white;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75em;
+  font-weight: 700;
+  font-style: italic;
+}
+.info-box p { color: var(--gray-700); }
+
+/* ===== SUGGESTED ANSWER ===== */
+.suggested {
+  background: var(--green-bg);
+  border-radius: 10px;
+  padding: 18px 20px;
+  margin-bottom: 12px;
+  border: 1px solid #c8e6c9;
+}
+.suggested h4 {
+  color: var(--green-border);
+  font-size: 0.72em;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.suggested h4::before {
+  content: '\2713';
+  display: inline-flex;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--green-border);
+  color: white;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.7em;
+}
+.suggested p { font-size: 0.88em; color: var(--gray-700); margin-bottom: 6px; }
+.suggested p:last-child { margin-bottom: 0; }
+.suggested strong { color: var(--primary); }
+
+/* ===== VERIFY CHECKBOX ===== */
+.verify {
+  margin-bottom: 22px;
+  padding: 14px 18px;
+  background: var(--gray-50);
+  border-radius: 10px;
+  border: 1px solid var(--gray-200);
+}
+.verify-top {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.verify-top input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  accent-color: var(--accent);
+  flex-shrink: 0;
+  cursor: pointer;
+}
+.verify-top label {
+  font-weight: 600;
+  font-size: 0.9em;
+  color: var(--primary);
+  cursor: pointer;
+}
+.verify textarea {
+  width: 100%;
+  min-height: 48px;
+  padding: 10px 14px;
+  border: 1.5px solid var(--gray-200);
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: 0.88em;
+  resize: vertical;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  margin-top: 10px;
+  background: var(--white);
+}
+.verify textarea:focus { border-color: var(--accent); outline: none; box-shadow: 0 0 0 3px rgba(var(--accent-rgb, 203,0,124), 0.1); }
+.verify textarea::placeholder { color: #aaa; }
+
+/* ===== OPEN QUESTION ===== */
+.question { margin-bottom: 22px; }
+.question label {
+  display: block;
+  font-weight: 600;
+  font-size: 0.92em;
+  margin-bottom: 8px;
+  color: var(--primary);
+}
+.question textarea {
+  width: 100%;
+  min-height: 76px;
+  padding: 14px 16px;
+  border: 1.5px solid var(--gray-200);
+  border-radius: 10px;
+  font-family: inherit;
+  font-size: 0.9em;
+  resize: vertical;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  background: var(--white);
+}
+.question textarea:focus { border-color: var(--accent); outline: none; box-shadow: 0 0 0 3px rgba(var(--accent-rgb, 203,0,124), 0.1); }
+.question textarea::placeholder { color: #aaa; }
+
+/* ===== TABLES ===== */
+table { width: 100%; border-collapse: collapse; margin-bottom: 14px; font-size: 0.88em; border-radius: 8px; overflow: hidden; }
+th { background: var(--primary); color: var(--white); padding: 11px 14px; text-align: left; font-weight: 600; font-size: 0.82em; text-transform: uppercase; letter-spacing: 0.8px; }
+td { padding: 11px 14px; border-bottom: 1px solid var(--gray-100); }
+tr:last-child td { border-bottom: none; }
+tr:nth-child(even) td { background: var(--gray-50); }
+
+/* ===== SECTION NOTE ===== */
+.section-note {
+  font-size: 0.85em;
+  color: var(--gray-500);
+  font-style: italic;
+  margin-bottom: 20px;
+  padding-left: 2px;
+}
+
+/* ===== REPORT-SPECIFIC ===== */
+.report-body { padding: 36px 40px; }
+.report-body h3 {
+  color: var(--primary);
+  font-size: 1.1em;
+  font-weight: var(--heading-weight, 700);
+  text-transform: var(--heading-transform, uppercase);
+  letter-spacing: 1.5px;
+  margin: 36px 0 16px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid var(--gray-200);
+}
+.report-body h3:first-child { margin-top: 0; }
+.report-body h4 {
+  color: var(--primary);
+  font-size: 0.95em;
+  font-weight: 600;
+  margin: 24px 0 10px;
+}
+.report-body p { margin-bottom: 12px; font-size: 0.95em; color: var(--gray-700); line-height: 1.7; }
+.report-body ul, .report-body ol { margin: 10px 0 20px 24px; font-size: 0.95em; color: var(--gray-700); }
+.report-body li { margin-bottom: 8px; line-height: 1.65; }
+.report-body hr { border: none; height: 1px; background: var(--gray-200); margin: 32px 0; }
+.report-body blockquote {
+  border-left: 4px solid var(--accent);
+  background: var(--gray-50);
+  padding: 16px 22px;
+  margin: 20px 0;
+  border-radius: 0 8px 8px 0;
+  font-style: italic;
+  color: var(--gray-700);
+}
+
+/* Report tables get extra room */
+.report-body table { margin: 16px 0 24px; font-size: 0.9em; }
+.report-body th { padding: 13px 16px; font-size: 0.8em; letter-spacing: 1px; }
+.report-body td { padding: 13px 16px; }
+
+/* ===== CALLOUT BOXES ===== */
+.callout {
+  border-radius: 10px;
+  padding: 18px 20px;
+  margin: 16px 0;
+  font-size: 0.88em;
+}
+.callout-key { background: var(--accent-light); border: 1px solid var(--accent); }
+.callout-key h4 { color: var(--accent); }
+.callout-info { background: var(--blue-bg); border: 1px solid #d6e4f0; }
+.callout-info h4 { color: var(--primary); }
+.callout-success { background: var(--green-bg); border: 1px solid #c8e6c9; }
+.callout-success h4 { color: var(--green-border); }
+.callout h4 {
+  font-size: 0.78em;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+}
+.callout p { color: var(--gray-700); margin-bottom: 4px; }
+
+/* ===== FOOTER ACTIONS ===== */
+.actions {
+  text-align: center;
+  padding: 36px 0 0;
+}
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 36px;
+  font-size: 0.85em;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s;
+  border: 2px solid transparent;
+}
+.btn-primary { background: var(--accent); color: var(--white); border-color: var(--accent); }
+.btn-primary:hover { background: var(--accent-dark); border-color: var(--accent-dark); }
+.btn-outline { background: transparent; color: var(--primary); border-color: var(--primary); margin-left: 12px; }
+.btn-outline:hover { background: var(--primary); color: var(--white); }
+
+.footer-nav {
+  text-align: center;
+  padding: 8px 0 0;
+}
+.footer-nav a {
+  color: var(--primary);
+  text-decoration: none;
+  font-size: 0.82em;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 24px;
+  border: 1.5px solid var(--gray-200);
+  border-radius: 8px;
+  transition: all 0.2s;
+}
+.footer-nav a:hover {
+  border-color: var(--primary);
+  background: var(--gray-50);
+}
+
+.footer-note {
+  text-align: center;
+  color: var(--gray-500);
+  font-size: 0.75em;
+  padding: 16px 0 40px;
+  letter-spacing: 0.5px;
+}
+
+/* ===== DIVIDER ===== */
+.divider {
+  height: 1px;
+  background: var(--gray-200);
+  margin: 20px 0;
+}
+
+/* ===== PRINT ===== */
+
+/* Remove browser default headers/footers (date, URL, page#) */
+@page {
+  margin: 0.4in 0.5in;
+  size: letter;
+}
+
+@media print {
+  /* Force backgrounds to print (navy hero, table headers, etc.) */
+  * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    color-adjust: exact !important;
+  }
+
+  body {
+    background: white;
+    font-size: 12pt;
+    margin: 0;
+    padding: 0;
+  }
+
+  /* Keep the hero but make it compact and branded */
+  .hero {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 50%, var(--primary) 100%) !important;
+    color: white !important;
+    margin: 0 -0.5in;
+    padding: 28px 0.5in 18px;
+    width: calc(100% + 1in);
+    overflow: visible !important;
+  }
+  .hero::after { display: none; }
+  .hero h1 { font-size: 1.4em; margin-bottom: 4px; color: white !important; }
+  .hero p { color: rgba(255,255,255,0.7) !important; font-size: 0.85em; }
+  .hero .accent { color: var(--accent) !important; }
+  .hero-logo { width: 60px; height: 60px; margin-bottom: 10px; }
+
+  /* Hide interactive/nav elements */
+  .top-nav { display: none !important; }
+  .progress-wrap { display: none !important; }
+  .actions { display: none !important; }
+  .footer-nav { display: none !important; }
+
+  /* Container resets */
+  .container,
+  .container.container--wide {
+    max-width: 100%;
+    padding: 16px 0 0;
+    margin: 0;
+  }
+
+  /* Report body — tighter for print */
+  .report-body {
+    padding: 8px 0 0;
+  }
+  .report-body h3 {
+    font-size: 11pt;
+    margin: 20px 0 8px;
+    padding-bottom: 6px;
+    color: var(--primary) !important;
+  }
+  .report-body h4 {
+    font-size: 10pt;
+    margin: 14px 0 6px;
+    color: var(--primary) !important;
+  }
+  .report-body p { font-size: 10pt; margin-bottom: 6px; line-height: 1.5; }
+  .report-body ul, .report-body ol { font-size: 10pt; margin: 6px 0 12px 20px; }
+  .report-body li { margin-bottom: 4px; line-height: 1.5; }
+  .report-body hr { margin: 18px 0; }
+  .report-body blockquote {
+    padding: 10px 14px;
+    margin: 12px 0;
+    border-left-color: var(--accent) !important;
+    background: #f8f8f8 !important;
+  }
+
+  /* Tables — keep navy headers */
+  table { font-size: 9pt; margin: 10px 0 16px; page-break-inside: avoid; }
+  th {
+    background: var(--primary) !important;
+    color: white !important;
+    padding: 8px 10px;
+    font-size: 8pt;
+  }
+  td { padding: 8px 10px; }
+  tr:nth-child(even) td { background: #f5f5f5 !important; }
+
+  /* Sections (questionnaire) */
+  section {
+    border: 1px solid #ddd;
+    box-shadow: none !important;
+    page-break-inside: avoid;
+    margin-bottom: 12px;
+  }
+  .section-num {
+    background: var(--primary) !important;
+    color: white !important;
+  }
+  .section-header h2 { color: var(--primary) !important; }
+  .section-badge { border: 1px solid currentColor; }
+
+  /* Suggested/info boxes keep color */
+  .suggested {
+    background: #f0f9f0 !important;
+    border-color: #c8e6c9 !important;
+  }
+  .suggested h4 { color: #34a853 !important; }
+  .suggested h4::before { background: #34a853 !important; color: white !important; }
+  .info-box { background: #eef4fb !important; border-color: #d6e4f0 !important; }
+  .info-box h4 { color: var(--primary) !important; }
+  .info-box h4::before { background: var(--primary) !important; color: white !important; }
+
+  /* Textareas visible for print-and-fill */
+  textarea { border: 1px solid #ccc !important; min-height: 50px !important; }
+  .verify-top input[type="checkbox"] { accent-color: var(--accent) !important; }
+
+  /* Intro card */
+  .intro { border: 1px solid #ddd; page-break-inside: avoid; }
+  .intro::before { background: linear-gradient(90deg, var(--accent), var(--primary)) !important; }
+  .stat .num { color: var(--primary) !important; }
+
+  /* Footer */
+  .footer-note { padding: 12px 0 0; font-size: 8pt; }
+
+  /* Prevent orphaned headings */
+  h3, h4 { page-break-after: avoid; }
+  ul, ol, table, blockquote { page-break-inside: avoid; }
+}
+
+</style>
+</head>
+<body>
+
+<div class="top-nav">
+  <a href="index.html"><span class="nav-arrow">&larr;</span> Back to Portal</a>
+  <span class="nav-brand">NuLite</span>
+</div>
+
+<div class="hero">
+  <div class="hero-logo"><img src="https://www.electricboatsboston.com/wp-content/uploads/2020/11/BEB-LOGO-2-1-2048x2048-1-e1626885368128-300x300.png" alt="Boston Electric Boats"></div>
+  <h1>Boston Electric Boats</h1>
+  <p>Customer Experience Guide</p>
+</div>
+
+<div class="container container--wide">
+  <div class="report-body">
+    <blockquote>
+<p>Compiled: 2026-03-19</p>
+<p>Purpose: Enrich FAQ / chatbot knowledge base with real customer insights, practical tips, and local recommendations.</p>
+</blockquote>
+<hr>
+<h3>1. Best Time of Day / Sunset & Golden Hour</h3>
+<h4>Boston Sunset Times (May&ndash;October 2026)</h4>
+<table>
+<tr><th>Month</th><th>~1st of Month</th><th>~15th of Month</th><th>Golden Hour Starts*</th></tr>
+<tr><td>May</td><td>8:02 PM</td><td>8:14 PM</td><td>~6:45 PM / ~7:00 PM</td></tr>
+<tr><td>June</td><td>8:32 PM</td><td>8:38 PM</td><td>~7:15 PM / ~7:20 PM</td></tr>
+<tr><td>July</td><td>8:39 PM</td><td>8:34 PM</td><td>~7:20 PM / ~7:15 PM</td></tr>
+<tr><td>August</td><td>8:15 PM</td><td>7:58 PM</td><td>~7:00 PM / ~6:40 PM</td></tr>
+<tr><td>September</td><td>7:29 PM</td><td>7:07 PM</td><td>~6:15 PM / ~5:50 PM</td></tr>
+<tr><td>October</td><td>6:35 PM</td><td>6:10 PM</td><td>~5:20 PM / ~4:55 PM</td></tr>
+</table>
+<p>*Golden hour is approximately 1 hour before sunset. For photography/ambiance, the best light begins ~45&ndash;60 minutes before sunset and lasts through ~15 minutes after.</p>
+<p><strong>Latest sunset of the year:</strong> June 27 at 8:26 PM (peak of summer).</p>
+<h4>Booking Recommendations by Season</h4>
+<table>
+<tr><th>Season</th><th>Best Departure Time for Sunset</th><th>Notes</th></tr>
+<tr><td>May</td><td>6:00&ndash;6:30 PM</td><td>Sunset ~8:00&ndash;8:15 PM. Comfortable temps. Fewer crowds than summer.</td></tr>
+<tr><td>June</td><td>6:30&ndash;7:00 PM</td><td>Longest days. Sunset ~8:30&ndash;8:40 PM. Peak golden hour.</td></tr>
+<tr><td>July</td><td>6:30&ndash;7:00 PM</td><td>Similar to June but gets darker slightly earlier by late July.</td></tr>
+<tr><td>August</td><td>6:00&ndash;6:30 PM</td><td>Sunset starts retreating. Still warm evenings.</td></tr>
+<tr><td>September</td><td>5:00&ndash;5:30 PM</td><td>Sunset ~7:00&ndash;7:30 PM. Fall colors begin. Cooler air.</td></tr>
+<tr><td>October</td><td>4:00&ndash;4:30 PM</td><td>Earliest sunsets. Dress warmly. Beautiful fall light.</td></tr>
+</table>
+<p><strong>Key insight from reviews:</strong> "A golden hour boat ride on a perfect summer night is THE way to see Boston." (Yelp reviewer)</p>
+<h4>Other Time-of-Day Notes</h4>
+<ul>
+<li><strong>Morning/midday:</strong> Great for families with kids &mdash; less crowded, calmer waters, full visibility of landmarks.</li>
+<li><strong>Late afternoon → sunset:</strong> Most popular and most recommended by reviewers. Book well in advance for peak summer sunset slots.</li>
+<li><strong>Shoulder season (May, Oct):</strong> Reviewers note fewer crowds and same amazing views. Great for a more peaceful experience.</li>
+</ul>
+<hr>
+<h3>2. Insider Tips from Reviews</h3>
+<h4>What to Bring</h4>
+<p>Compiled from TripAdvisor, Yelp, Google, blog posts, and the BEB website:</p>
+<ul>
+<li><strong>Food & drinks</strong> &mdash; BYOB is allowed! Bring a picnic, snacks, charcuterie, sandwiches, etc.</li>
+<li><strong>Your favorite playlist</strong> &mdash; Boats have Bluetooth speakers. Curate a playlist in advance.</li>
+<li><strong>Sunscreen</strong> &mdash; Open deck areas get direct sun.</li>
+<li><strong>Sunglasses</strong> &mdash; Glare off the water is real.</li>
+<li><strong>An extra layer of clothing</strong> &mdash; It's always cooler on the water, even in summer. Reviewers specifically call this out. One noted being comfortable on a 60-degree day with 18 mph winds thanks to the window enclosures.</li>
+<li><strong>Non-glass containers</strong> &mdash; NO GLASS ALLOWED. Bring cans, plastic cups, or aluminum bottles. A cleanup fee is charged if glass breaks.</li>
+<li><strong>Camera / phone</strong> &mdash; The skyline views, USS Constitution, bridges, and harbor scenery are photo-worthy.</li>
+</ul>
+<h4>What NOT to Bring</h4>
+<ul>
+<li><strong>No glass bottles or glassware</strong> of any kind (cleanup fee if glass breaks).</li>
+<li><strong>No hard liquor</strong> &mdash; Beer, wine, and seltzers ONLY. No straight spirits.</li>
+<li><strong>No excessive amounts of alcohol</strong> &mdash; BEB reserves the right to restrict customers who bring too much.</li>
+</ul>
+<h4>Reviewer Tips & Advice</h4>
+<p>1. <strong>"It's like a large golf cart on water"</strong> &mdash; Multiple reviewers describe the 6 mph max speed this way. Don't expect a speedboat; embrace the leisurely pace.</p>
+<p>2. <strong>The GPS route is your friend</strong> &mdash; BEB provides a pre-set suggested route on a digital screen. Follow it for the best sightseeing loop.</p>
+<p>3. <strong>The 30-minute acclimation period is real</strong> &mdash; First-timers report feeling fully comfortable after about 30 minutes of driving. The staff walkthrough before departure is thorough.</p>
+<p>4. <strong>Window enclosures are a game-changer</strong> &mdash; Clear plastic side windows can be opened for breeze on warm days or closed for wind/rain protection. Multiple reviewers praise this feature for cooler days.</p>
+<p>5. <strong>Book well in advance for weekends and sunset slots</strong> &mdash; Limited availability during peak season. Weekend sunset slots go fast.</p>
+<p>6. <strong>Let BEB provision you</strong> &mdash; One TripAdvisor reviewer ordered charcuterie and dessert trays through BEB and said they were "excellent." The Sweet Lizzy P dessert boxes are a popular add-on.</p>
+<p>7. <strong>Arrive 15 minutes early</strong> &mdash; Gives time for parking, check-in, and the orientation briefing.</p>
+<p>8. <strong>The captain doesn't drink</strong> &mdash; Whoever is driving should abstain from alcohol. Passengers can drink freely.</p>
+<p>9. <strong>You don't need boating experience</strong> &mdash; Literally every review mentions how easy it is. A driver's license is the only "qualification."</p>
+<p>10. <strong>Fall is underrated</strong> &mdash; Reviewers call out fall as having clear skies, brilliant harbor colors, and peaceful boating with fewer crowds.</p>
+<h4>What You'll See on the Harbor</h4>
+<ul>
+<li>USS Constitution ("Old Ironsides") &mdash; you can get close</li>
+<li>Tobin Bridge</li>
+<li>Zakim Bridge</li>
+<li>Boston skyline panorama</li>
+<li>Boston Tea Party ships</li>
+<li>Charlestown Navy Yard</li>
+<li>Harbor islands in the distance</li>
+<li>Various sailboats and harbor traffic</li>
+</ul>
+<hr>
+<h3>3. Common Booking Occasions</h3>
+<p>Based on BEB's own marketing, reviews, and social media mentions:</p>
+<h4>Top Occasions (Ranked by Frequency of Mention)</h4>
+<p>1. <strong>Birthday Celebrations</strong> &mdash; Most commonly mentioned occasion. Groups of friends/family celebrate on the water with BYOB and snacks. BEB offers Sweet Lizzy P dessert boxes as an add-on for birthday treats.</p>
+<p>2. <strong>Date Night / Anniversary</strong> &mdash; Reviewers describe sunset cruises as "the perfect date." The privacy of your own boat makes it intimate. BEB markets this as: "Level up an anniversary or date night with a private and intimate sunset cruise."</p>
+<p>3. <strong>Bachelorette / Bachelor Parties</strong> &mdash; Very popular. Groups book multiple boats for larger parties (up to 60 people with multi-boat bookings). The BYOB policy makes it affordable for groups.</p>
+<p>4. <strong>Corporate Team Building / Client Entertainment</strong> &mdash; BEB explicitly markets to corporate groups. The boats offer "a unique and relaxed setting suitable for celebrating company milestones, entertaining clients, or fostering team spirit." Custom catering available for corporate outings.</p>
+<p>5. <strong>Friends / Social Gatherings</strong> &mdash; General friend groups wanting a unique activity. Reviewers call it "a great, affordable, and available activity on the harbor for a group."</p>
+<p>6. <strong>Family Outings</strong> &mdash; Families with kids of all ages (reviewers mention ages 2&ndash;13). Life jackets provided for all. No physical endurance required.</p>
+<p>7. <strong>Proposals / Engagements</strong> &mdash; BEB lists proposals as a key occasion. A private sunset cruise on the harbor is a memorable setting.</p>
+<p>8. <strong>Tourists / Visitors</strong> &mdash; A unique way to see Boston that's different from standard harbor tours. "Must do in Boston!" per TripAdvisor.</p>
+<p>9. <strong>Holiday Celebrations</strong> &mdash; 4th of July (fireworks from the water), Memorial Day weekend kickoff, Labor Day, etc.</p>
+<h4>BEB's Official "Top 5 Occasions" (from their blog)</h4>
+<p>BEB published a blog post titled "Top 5 Occasions to Book a Private Electric Boat in Boston" covering:</p>
+<ul>
+<li>Celebrations (birthdays, anniversaries)</li>
+<li>Proposals and engagements</li>
+<li>Corporate events and team building</li>
+<li>Date nights</li>
+<li>Friend/family social gatherings</li>
+</ul>
+<hr>
+<h3>4. Nearby Restaurants & Bars</h3>
+<p>BEB launches from <strong>India Wharf Marina / Lewis Wharf area</strong>, 28 Atlantic Ave, Boston &mdash; right at the edge of the <strong>North End</strong>, Boston's historic Italian neighborhood.</p>
+<h4>Waterfront Restaurants (Walking Distance)</h4>
+<table>
+<tr><th>Restaurant</th><th>Distance</th><th>Vibe</th><th>Best For</th><th>Notes</th></tr>
+<tr><td><strong>The Boston Sail Loft</strong></td><td>On Lewis/Commercial Wharf</td><td>Casual seafood, harbor views</td><td>Pre-cruise lunch, post-cruise drinks</td><td>Since 1984. No reservations (first-come). Famous clam chowder. North End Mule & Paloma cocktails. Literally juts out over the wharf.</td></tr>
+<tr><td><strong>Joe's Waterfront</strong></td><td>100 Atlantic Ave</td><td>Upscale casual, harbor views</td><td>Pre-cruise dinner, celebrations</td><td>Indoor + outdoor seating. Local ingredients. Brunch, lunch, dinner.</td></tr>
+<tr><td><strong>Battery Wharf Grille</strong></td><td>Battery Wharf</td><td>Upscale New England</td><td>Special occasion pre/post</td><td>Chef-driven. Sprawling footprint. Terrace + Battery Lounge for cocktails.</td></tr>
+<tr><td><strong>Chart House</strong></td><td>Long Wharf</td><td>Upscale seafood</td><td>Date night dinner before/after</td><td>Harbor views, historic building.</td></tr>
+</table>
+<h4>North End Italian (2&ndash;5 min walk)</h4>
+<table>
+<tr><th>Restaurant</th><th>Vibe</th><th>Best For</th><th>Notes</th></tr>
+<tr><td><strong>Mare Oyster Bar</strong></td><td>Upscale Italian seafood</td><td>Pre-cruise raw bar & drinks</td><td>Crudo, oysters, craft cocktails. Sleek decor.</td></tr>
+<tr><td><strong>AquaPazza</strong></td><td>Italian seafood, waterfront</td><td>Dinner before/after</td><td>Creative appetizers, handmade pasta, waterfront outlook.</td></tr>
+<tr><td><strong>Bricco</strong></td><td>Contemporary Italian</td><td>Date night, wine</td><td>Award-winning wine list. Espresso martinis. Bar seating for drinks + small bites.</td></tr>
+<tr><td><strong>Strega North End</strong></td><td>Italian steakhouse</td><td>Celebration dinner</td><td>High-energy. Celebrity clientele.</td></tr>
+<tr><td><strong>La Famiglia Giorgio's</strong></td><td>Traditional Italian</td><td>Family dinner (big portions)</td><td>Massive family-style portions. Great value.</td></tr>
+<tr><td><strong>Trattoria il Panino</strong></td><td>Classic Italian</td><td>Traditional North End experience</td><td>Hanover St staple.</td></tr>
+</table>
+<h4>Bars & Cocktails (Pre/Post Cruise)</h4>
+<table>
+<tr><th>Bar</th><th>Vibe</th><th>Notes</th></tr>
+<tr><td><strong>Parla</strong></td><td>Speakeasy cocktails</td><td>Numbered secret cocktail list. Rotating themed drinks (pineapple-hibiscus, cucumber-dill). Small plates.</td></tr>
+<tr><td><strong>The Red Fox</strong></td><td>Modern cocktail bar</td><td>Negroni & martini variations. "Aglio e Pepe" dry martini. Opened 2024.</td></tr>
+<tr><td><strong>MIA Roof Deck</strong></td><td>Rooftop cocktails</td><td>Skyline views from the North End. Crafted cocktails.</td></tr>
+<tr><td><strong>Stanza dei Sigari</strong></td><td>Cigar lounge + cocktails</td><td>Scotch, cognac, and cocktails in a classic atmosphere.</td></tr>
+<tr><td><strong>The Boston Sail Loft Bar</strong></td><td>Casual waterfront bar</td><td>Walk-in. Great cocktails + views. Perfect for a drink right at the wharf.</td></tr>
+</table>
+<h4>Suggested Itineraries</h4>
+<p><strong>Date Night:</strong></p>
+<p>Drinks at Parla or The Red Fox (speakeasy vibes) → Sunset cruise → Dessert at Mike's Pastry or Modern Pastry (both on Hanover St)</p>
+<p><strong>Birthday/Bachelorette:</strong></p>
+<p>Dinner at Strega or Bricco → Sunset cruise with BYOB → Post-cruise drinks at MIA Roof Deck</p>
+<p><strong>Family Outing:</strong></p>
+<p>Lunch at La Famiglia Giorgio's or Boston Sail Loft → Afternoon cruise → Cannoli walk on Hanover St</p>
+<p><strong>Corporate:</strong></p>
+<p>Cocktail hour at Battery Wharf Grille → Captained charter → Dinner at Joe's Waterfront or Chart House</p>
+<p><strong>Casual Friends:</strong></p>
+<p>Grab food at Sail Loft → Load up cooler with drinks → Sunset cruise → Post-cruise North End bar crawl</p>
+<hr>
+<h3>5. Tipping Information</h3>
+<h4>Does BEB Mention Tipping?</h4>
+<p>No specific tipping policy was found on BEB's website, FAQ, or in any customer reviews. This is a gap in their current customer communications.</p>
+<h4>Self-Drive Rentals ("Be Your Own Captain")</h4>
+<ul>
+<li>There is no captain to tip &mdash; you are driving the boat yourself.</li>
+<li><strong>Dock staff</strong> who help with orientation, safety briefing, and launch: A $10&ndash;$20 tip per group is appreciated but not expected or required. This is consistent with general marina tipping etiquette.</li>
+<li>Tipping is more of a "nice gesture" for self-drive; it is not an industry expectation the way it is for captained charters.</li>
+</ul>
+<h4>Captain Provided Charters ($639+)</h4>
+<ul>
+<li><strong>Industry standard:</strong> 10&ndash;20% of the charter fee, with 15% being the norm.</li>
+<li>For a $639 charter: $64&ndash;$128 tip range (15% = ~$96).</li>
+<li>For a $659 weekend charter: $66&ndash;$132 tip range (15% = ~$99).</li>
+<li><strong>Cash is preferred</strong> and given directly to the captain at the end of the charter.</li>
+<li>Exceptional service merits a higher tip (20%+).</li>
+</ul>
+<h4>General Guidance for Chatbot</h4>
+<p>Suggested chatbot response: "Tipping is not required but always appreciated. For our Captain Provided Charters, a gratuity of 15&ndash;20% is customary and can be given directly to your captain in cash at the end of the trip. For self-drive rentals, our dock staff appreciate tips but they are entirely optional."</p>
+<p><em>Note: This should be confirmed with Patrick before going live in the chatbot &mdash; BEB may have a specific stance on tipping they want communicated.</em></p>
+<hr>
+<h3>6. Additional Findings</h3>
+<h4>Ratings Summary</h4>
+<table>
+<tr><th>Platform</th><th>Rating</th><th>Reviews</th></tr>
+<tr><td>Yelp</td><td>5.0 stars</td><td>10 reviews</td></tr>
+<tr><td>TripAdvisor</td><td>Positive</td><td>3 reviews</td></tr>
+<tr><td>Google</td><td>Positive</td><td>Multiple</td></tr>
+<tr><td>BBB</td><td>Listed</td><td>Business profile exists</td></tr>
+</table>
+<h4>Key Themes Across All Reviews</h4>
+<p>1. <strong>Easy to operate</strong> &mdash; unanimously praised, even by first-timers</p>
+<p>2. <strong>Boats are spotless and well-maintained</strong> &mdash; "brand new" feel</p>
+<p>3. <strong>Staff is friendly and thorough</strong> &mdash; safety briefing and walkthrough well-received</p>
+<p>4. <strong>Unique experience</strong> &mdash; nothing else like it in Boston (confirmed by competitive research)</p>
+<p>5. <strong>Great value</strong> &mdash; as low as $42/person for a 2-hour private cruise</p>
+<p>6. <strong>Perfect for groups</strong> &mdash; social, BYOB, Bluetooth speakers, plenty of seating</p>
+<p>7. <strong>Scenic harbor views</strong> &mdash; skyline, USS Constitution, bridges</p>
+<p>8. <strong>Quiet and eco-friendly</strong> &mdash; electric motors are "whisper-quiet"</p>
+<p>9. <strong>Repeat customers exist</strong> &mdash; one Yelp reviewer mentioned 3 outings</p>
+<h4>Season & Hours</h4>
+<ul>
+<li><strong>Season:</strong> May 1 through mid-October (some sources say May 15)</li>
+<li><strong>Hours:</strong> 10:00 AM &ndash; 8:00 PM daily</li>
+<li><strong>Rental duration:</strong> 2 hours standard</li>
+</ul>
+<h4>Weather Policy (for chatbot context)</h4>
+<ul>
+<li>Boats operate in rain and cooler weather (canopy + window enclosures)</li>
+<li>BEB cancels only for dangerous conditions: high winds, heavy rain storms, severe lightning, rough seas</li>
+<li>Weather cancellations get a rain check or refund (minus 10% processing fee)</li>
+<li>Peek Protect plan available at checkout for full refund flexibility (24hr notice)</li>
+</ul>
+<h4>Parking (for chatbot context)</h4>
+<ul>
+<li>Closest lot: on Lewis Wharf property</li>
+<li>Additional parking garage and lots within walking distance</li>
+<li>North End street parking is extremely limited &mdash; garage recommended</li>
+</ul>
+<hr>
+<h3>Sources</h3>
+<ul>
+<li><a href="https://www.tripadvisor.com/Attraction_Review-g60745-d23319601-Reviews-Boston_Electric_Boats-Boston_Massachusetts.html" target="_blank">TripAdvisor &mdash; Boston Electric Boats</a></li>
+<li><a href="https://www.yelp.com/biz/boston-electric-boats-boston" target="_blank">Yelp &mdash; Boston Electric Boats</a></li>
+<li><a href="https://www.bostonglobe.com/2024/06/21/lifestyle/harboring-dreams-being-sailboat-captain-boston-electric-boats-makes-it-happen/" target="_blank">Boston Globe &mdash; "What it's like to rent from Boston Electric Boats"</a></li>
+<li><a href="https://brendaaftersixty.com/boston-electric-boats-be-your-own-captain-on-boston-harbor/" target="_blank">Brenda After Sixty &mdash; Blog Review</a></li>
+<li><a href="https://www.electricboatsboston.com/" target="_blank">BEB Official Website</a></li>
+<li><a href="https://www.electricboatsboston.com/faq/" target="_blank">BEB FAQ</a></li>
+<li><a href="https://www.electricboatsboston.com/cancellation-policy/" target="_blank">BEB Cancellation Policy</a></li>
+<li><a href="https://www.electricboatsboston.com/boat-cruise-boston-party/" target="_blank">BEB Party Boat Cruises</a></li>
+<li><a href="https://www.electricboatsboston.com/top-5-occasions-to-book-a-private-electric-boat-in-boston/" target="_blank">BEB Top 5 Occasions Blog</a></li>
+<li><a href="https://www.electricboatsboston.com/celebrate-with-a-cruise/" target="_blank">BEB Add-ons Page</a></li>
+<li><a href="https://www.electricboatsboston.com/summer-to-remember/" target="_blank">BEB Summer Blog</a></li>
+<li><a href="https://bostonuncovered.com/boat-rental-boston/" target="_blank">Boston Uncovered &mdash; $42 Electric Boat</a></li>
+<li><a href="https://whdh.com/news/mass-appeal-boston-electric-boats/" target="_blank">WHDH Mass Appeal &mdash; BEB Segment</a></li>
+<li><a href="https://www.timeanddate.com/sun/usa/boston" target="_blank">TimeAndDate &mdash; Boston Sunset Times</a></li>
+<li><a href="https://www.discoverboating.com/resources/charter-boat-tipping-etiquette" target="_blank">Discover Boating &mdash; Charter Tipping Etiquette</a></li>
+<li><a href="https://empirecruises.com/charter-boat-tipping-etiquette-how-much-should-you-tip-your-captain/" target="_blank">Empire Cruises &mdash; Charter Tipping Guide</a></li>
+<li><a href="https://thecleverboater.com/lifestyle/tipping-marina-staff/" target="_blank">The Clever Boater &mdash; Marina Staff Tipping</a></li>
+<li><a href="https://www.opentable.com/features/best-waterfront-restaurants-boston-north-end-ma" target="_blank">OpenTable &mdash; North End Waterfront Restaurants</a></li>
+<li><a href="https://www.bostonmagazine.com/restaurants/best-north-end-restaurants/" target="_blank">Boston Magazine &mdash; Best North End Restaurants</a></li>
+</ul>
+
+  </div>
+
+  <div class="actions">
+    <button class="btn btn-primary" onclick="window.print()">Print / Save as PDF</button>
+  </div>
+  <div class="footer-nav">
+    <a href="index.html"><span>&larr;</span> Back to Portal</a>
+  </div>
+  <p class="footer-note">Prepared by NuLite &bull; March 2026</p>
+</div>
+
+</body>
+</html>

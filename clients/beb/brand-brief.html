@@ -1,0 +1,1008 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Boston Electric Boats &mdash; Brand Brief</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+:root {
+    --primary: #001e48;
+    --primary-light: #002a6b;
+    --accent: #cb007c;
+    --accent-dark: #a30064;
+    --accent-light: #f5e0ef;
+    --accent-glow: #ff4dc9;
+    --heading-transform: uppercase;
+    --heading-spacing: 3px;
+    --heading-weight: 700;
+    --font-family: 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  }
+/* ClientPortal — Base CSS Template
+ *
+ * All colors reference CSS custom properties set per-client.
+ * The build script injects :root variables from the client config.
+ *
+ * Required custom properties (set by build):
+ *   --primary, --primary-light, --accent, --accent-dark, --accent-light
+ *   --heading-transform, --heading-spacing, --heading-weight
+ */
+
+/* ===== FOUNDATIONS ===== */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: var(--font-family, 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif);
+  background: var(--gray-50);
+  color: #1a1a2e;
+  line-height: 1.65;
+  font-size: 15px;
+  -webkit-font-smoothing: antialiased;
+}
+
+:root {
+  /* Neutrals (shared across all clients) */
+  --white: #ffffff;
+  --gray-50: #f8f9fb;
+  --gray-100: #f0f2f5;
+  --gray-200: #e2e5ea;
+  --gray-300: #d2d2d2;
+  --gray-500: #777;
+  --gray-700: #444;
+  --charcoal: #0f0f0f;
+  --green-bg: #f0f9f0;
+  --green-border: #34a853;
+  --blue-bg: #eef4fb;
+}
+
+/* ===== TOP NAV ===== */
+.top-nav {
+  background: var(--charcoal);
+  padding: 10px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.top-nav a {
+  color: rgba(255,255,255,0.7);
+  text-decoration: none;
+  font-size: 0.78em;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: color 0.2s;
+}
+.top-nav a:hover { color: var(--white); }
+.top-nav .nav-arrow { font-size: 1.1em; }
+.top-nav .nav-brand {
+  color: rgba(255,255,255,0.4);
+  font-size: 0.68em;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  font-weight: 600;
+}
+
+/* ===== HERO HEADER ===== */
+.hero {
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 50%, var(--primary) 100%);
+  color: var(--white);
+  padding: 48px 24px 44px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.hero::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  right: 0;
+  height: 40px;
+  background: var(--gray-50);
+  clip-path: ellipse(55% 100% at 50% 100%);
+}
+.hero-logo {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  margin: 0 auto 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.hero-logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.hero h1 {
+  font-size: 1.7em;
+  font-weight: var(--heading-weight, 700);
+  text-transform: var(--heading-transform, uppercase);
+  letter-spacing: var(--heading-spacing, 3px);
+  margin-bottom: 6px;
+}
+.hero p {
+  color: var(--gray-300);
+  font-size: 0.95em;
+  font-weight: 400;
+}
+.hero .accent { color: var(--accent); }
+
+/* ===== PROGRESS BAR ===== */
+.progress-wrap {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--white);
+  border-bottom: 1px solid var(--gray-200);
+  padding: 10px 24px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
+.progress-bar {
+  flex: 1;
+  height: 6px;
+  background: var(--gray-200);
+  border-radius: 3px;
+  overflow: hidden;
+}
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent), var(--accent-glow, var(--accent)));
+  border-radius: 3px;
+  width: 0%;
+  transition: width 0.4s ease;
+}
+.progress-text {
+  font-size: 0.75em;
+  color: var(--gray-500);
+  font-weight: 600;
+  white-space: nowrap;
+  min-width: 90px;
+  text-align: right;
+}
+
+/* ===== LAYOUT ===== */
+.container { max-width: 760px; margin: 0 auto; padding: 24px 20px 60px; }
+.container.container--wide { max-width: 960px; padding: 32px 28px 60px; }
+
+/* ===== INTRO CARD ===== */
+.intro {
+  background: var(--white);
+  border-radius: 16px;
+  padding: 28px 28px 24px;
+  margin-bottom: 28px;
+  border: 1px solid var(--gray-200);
+  position: relative;
+  overflow: hidden;
+}
+.intro::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--accent), var(--primary));
+}
+.intro h3 {
+  color: var(--primary);
+  font-size: 1.1em;
+  margin-bottom: 10px;
+}
+.intro p { margin-bottom: 8px; font-size: 0.92em; color: var(--gray-700); }
+.intro .highlight { color: var(--accent); font-weight: 600; }
+
+.stat-row {
+  display: flex;
+  gap: 12px;
+  margin-top: 16px;
+}
+.stat {
+  flex: 1;
+  text-align: center;
+  padding: 12px 8px;
+  background: var(--gray-50);
+  border-radius: 10px;
+  border: 1px solid var(--gray-200);
+}
+.stat .num { font-size: 1.5em; font-weight: 700; color: var(--primary); }
+.stat .lbl { font-size: 0.7em; color: var(--gray-500); text-transform: uppercase; letter-spacing: 1px; margin-top: 2px; }
+
+/* ===== SECTIONS ===== */
+section {
+  background: var(--white);
+  border-radius: 16px;
+  padding: 0;
+  margin-bottom: 20px;
+  border: 1px solid var(--gray-200);
+  overflow: hidden;
+  transition: box-shadow 0.2s;
+}
+section:hover { box-shadow: 0 4px 20px rgba(0,0,0,0.06); }
+
+.section-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 20px 28px;
+  border-bottom: 1px solid var(--gray-100);
+  cursor: pointer;
+  user-select: none;
+}
+.section-num {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--primary);
+  color: var(--white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.85em;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+.section-header h2 {
+  font-size: 1.05em;
+  font-weight: var(--heading-weight, 700);
+  color: var(--primary);
+  text-transform: var(--heading-transform, uppercase);
+  letter-spacing: 1.5px;
+  flex: 1;
+}
+.section-badge {
+  font-size: 0.65em;
+  padding: 3px 10px;
+  border-radius: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+}
+.badge-verify { background: var(--green-bg); color: var(--green-border); }
+.badge-fill { background: #fff3e0; color: #e65100; }
+.badge-mixed { background: var(--accent-light); color: var(--accent); }
+
+.section-body { padding: 24px 28px 28px; }
+
+/* ===== INFO BOX ===== */
+.info-box {
+  background: var(--blue-bg);
+  border-radius: 10px;
+  padding: 18px 20px;
+  margin-bottom: 22px;
+  font-size: 0.88em;
+  border: 1px solid #d6e4f0;
+}
+.info-box h4 {
+  color: var(--primary);
+  font-size: 0.78em;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.info-box h4::before {
+  content: 'i';
+  display: inline-flex;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--primary);
+  color: white;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75em;
+  font-weight: 700;
+  font-style: italic;
+}
+.info-box p { color: var(--gray-700); }
+
+/* ===== SUGGESTED ANSWER ===== */
+.suggested {
+  background: var(--green-bg);
+  border-radius: 10px;
+  padding: 18px 20px;
+  margin-bottom: 12px;
+  border: 1px solid #c8e6c9;
+}
+.suggested h4 {
+  color: var(--green-border);
+  font-size: 0.72em;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.suggested h4::before {
+  content: '\2713';
+  display: inline-flex;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--green-border);
+  color: white;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.7em;
+}
+.suggested p { font-size: 0.88em; color: var(--gray-700); margin-bottom: 6px; }
+.suggested p:last-child { margin-bottom: 0; }
+.suggested strong { color: var(--primary); }
+
+/* ===== VERIFY CHECKBOX ===== */
+.verify {
+  margin-bottom: 22px;
+  padding: 14px 18px;
+  background: var(--gray-50);
+  border-radius: 10px;
+  border: 1px solid var(--gray-200);
+}
+.verify-top {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.verify-top input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  accent-color: var(--accent);
+  flex-shrink: 0;
+  cursor: pointer;
+}
+.verify-top label {
+  font-weight: 600;
+  font-size: 0.9em;
+  color: var(--primary);
+  cursor: pointer;
+}
+.verify textarea {
+  width: 100%;
+  min-height: 48px;
+  padding: 10px 14px;
+  border: 1.5px solid var(--gray-200);
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: 0.88em;
+  resize: vertical;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  margin-top: 10px;
+  background: var(--white);
+}
+.verify textarea:focus { border-color: var(--accent); outline: none; box-shadow: 0 0 0 3px rgba(var(--accent-rgb, 203,0,124), 0.1); }
+.verify textarea::placeholder { color: #aaa; }
+
+/* ===== OPEN QUESTION ===== */
+.question { margin-bottom: 22px; }
+.question label {
+  display: block;
+  font-weight: 600;
+  font-size: 0.92em;
+  margin-bottom: 8px;
+  color: var(--primary);
+}
+.question textarea {
+  width: 100%;
+  min-height: 76px;
+  padding: 14px 16px;
+  border: 1.5px solid var(--gray-200);
+  border-radius: 10px;
+  font-family: inherit;
+  font-size: 0.9em;
+  resize: vertical;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  background: var(--white);
+}
+.question textarea:focus { border-color: var(--accent); outline: none; box-shadow: 0 0 0 3px rgba(var(--accent-rgb, 203,0,124), 0.1); }
+.question textarea::placeholder { color: #aaa; }
+
+/* ===== TABLES ===== */
+table { width: 100%; border-collapse: collapse; margin-bottom: 14px; font-size: 0.88em; border-radius: 8px; overflow: hidden; }
+th { background: var(--primary); color: var(--white); padding: 11px 14px; text-align: left; font-weight: 600; font-size: 0.82em; text-transform: uppercase; letter-spacing: 0.8px; }
+td { padding: 11px 14px; border-bottom: 1px solid var(--gray-100); }
+tr:last-child td { border-bottom: none; }
+tr:nth-child(even) td { background: var(--gray-50); }
+
+/* ===== SECTION NOTE ===== */
+.section-note {
+  font-size: 0.85em;
+  color: var(--gray-500);
+  font-style: italic;
+  margin-bottom: 20px;
+  padding-left: 2px;
+}
+
+/* ===== REPORT-SPECIFIC ===== */
+.report-body { padding: 36px 40px; }
+.report-body h3 {
+  color: var(--primary);
+  font-size: 1.1em;
+  font-weight: var(--heading-weight, 700);
+  text-transform: var(--heading-transform, uppercase);
+  letter-spacing: 1.5px;
+  margin: 36px 0 16px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid var(--gray-200);
+}
+.report-body h3:first-child { margin-top: 0; }
+.report-body h4 {
+  color: var(--primary);
+  font-size: 0.95em;
+  font-weight: 600;
+  margin: 24px 0 10px;
+}
+.report-body p { margin-bottom: 12px; font-size: 0.95em; color: var(--gray-700); line-height: 1.7; }
+.report-body ul, .report-body ol { margin: 10px 0 20px 24px; font-size: 0.95em; color: var(--gray-700); }
+.report-body li { margin-bottom: 8px; line-height: 1.65; }
+.report-body hr { border: none; height: 1px; background: var(--gray-200); margin: 32px 0; }
+.report-body blockquote {
+  border-left: 4px solid var(--accent);
+  background: var(--gray-50);
+  padding: 16px 22px;
+  margin: 20px 0;
+  border-radius: 0 8px 8px 0;
+  font-style: italic;
+  color: var(--gray-700);
+}
+
+/* Report tables get extra room */
+.report-body table { margin: 16px 0 24px; font-size: 0.9em; }
+.report-body th { padding: 13px 16px; font-size: 0.8em; letter-spacing: 1px; }
+.report-body td { padding: 13px 16px; }
+
+/* ===== CALLOUT BOXES ===== */
+.callout {
+  border-radius: 10px;
+  padding: 18px 20px;
+  margin: 16px 0;
+  font-size: 0.88em;
+}
+.callout-key { background: var(--accent-light); border: 1px solid var(--accent); }
+.callout-key h4 { color: var(--accent); }
+.callout-info { background: var(--blue-bg); border: 1px solid #d6e4f0; }
+.callout-info h4 { color: var(--primary); }
+.callout-success { background: var(--green-bg); border: 1px solid #c8e6c9; }
+.callout-success h4 { color: var(--green-border); }
+.callout h4 {
+  font-size: 0.78em;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+}
+.callout p { color: var(--gray-700); margin-bottom: 4px; }
+
+/* ===== FOOTER ACTIONS ===== */
+.actions {
+  text-align: center;
+  padding: 36px 0 0;
+}
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 36px;
+  font-size: 0.85em;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s;
+  border: 2px solid transparent;
+}
+.btn-primary { background: var(--accent); color: var(--white); border-color: var(--accent); }
+.btn-primary:hover { background: var(--accent-dark); border-color: var(--accent-dark); }
+.btn-outline { background: transparent; color: var(--primary); border-color: var(--primary); margin-left: 12px; }
+.btn-outline:hover { background: var(--primary); color: var(--white); }
+
+.footer-nav {
+  text-align: center;
+  padding: 8px 0 0;
+}
+.footer-nav a {
+  color: var(--primary);
+  text-decoration: none;
+  font-size: 0.82em;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 24px;
+  border: 1.5px solid var(--gray-200);
+  border-radius: 8px;
+  transition: all 0.2s;
+}
+.footer-nav a:hover {
+  border-color: var(--primary);
+  background: var(--gray-50);
+}
+
+.footer-note {
+  text-align: center;
+  color: var(--gray-500);
+  font-size: 0.75em;
+  padding: 16px 0 40px;
+  letter-spacing: 0.5px;
+}
+
+/* ===== DIVIDER ===== */
+.divider {
+  height: 1px;
+  background: var(--gray-200);
+  margin: 20px 0;
+}
+
+/* ===== PRINT ===== */
+
+/* Remove browser default headers/footers (date, URL, page#) */
+@page {
+  margin: 0.4in 0.5in;
+  size: letter;
+}
+
+@media print {
+  /* Force backgrounds to print (navy hero, table headers, etc.) */
+  * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    color-adjust: exact !important;
+  }
+
+  body {
+    background: white;
+    font-size: 12pt;
+    margin: 0;
+    padding: 0;
+  }
+
+  /* Keep the hero but make it compact and branded */
+  .hero {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 50%, var(--primary) 100%) !important;
+    color: white !important;
+    margin: 0 -0.5in;
+    padding: 28px 0.5in 18px;
+    width: calc(100% + 1in);
+    overflow: visible !important;
+  }
+  .hero::after { display: none; }
+  .hero h1 { font-size: 1.4em; margin-bottom: 4px; color: white !important; }
+  .hero p { color: rgba(255,255,255,0.7) !important; font-size: 0.85em; }
+  .hero .accent { color: var(--accent) !important; }
+  .hero-logo { width: 60px; height: 60px; margin-bottom: 10px; }
+
+  /* Hide interactive/nav elements */
+  .top-nav { display: none !important; }
+  .progress-wrap { display: none !important; }
+  .actions { display: none !important; }
+  .footer-nav { display: none !important; }
+
+  /* Container resets */
+  .container,
+  .container.container--wide {
+    max-width: 100%;
+    padding: 16px 0 0;
+    margin: 0;
+  }
+
+  /* Report body — tighter for print */
+  .report-body {
+    padding: 8px 0 0;
+  }
+  .report-body h3 {
+    font-size: 11pt;
+    margin: 20px 0 8px;
+    padding-bottom: 6px;
+    color: var(--primary) !important;
+  }
+  .report-body h4 {
+    font-size: 10pt;
+    margin: 14px 0 6px;
+    color: var(--primary) !important;
+  }
+  .report-body p { font-size: 10pt; margin-bottom: 6px; line-height: 1.5; }
+  .report-body ul, .report-body ol { font-size: 10pt; margin: 6px 0 12px 20px; }
+  .report-body li { margin-bottom: 4px; line-height: 1.5; }
+  .report-body hr { margin: 18px 0; }
+  .report-body blockquote {
+    padding: 10px 14px;
+    margin: 12px 0;
+    border-left-color: var(--accent) !important;
+    background: #f8f8f8 !important;
+  }
+
+  /* Tables — keep navy headers */
+  table { font-size: 9pt; margin: 10px 0 16px; page-break-inside: avoid; }
+  th {
+    background: var(--primary) !important;
+    color: white !important;
+    padding: 8px 10px;
+    font-size: 8pt;
+  }
+  td { padding: 8px 10px; }
+  tr:nth-child(even) td { background: #f5f5f5 !important; }
+
+  /* Sections (questionnaire) */
+  section {
+    border: 1px solid #ddd;
+    box-shadow: none !important;
+    page-break-inside: avoid;
+    margin-bottom: 12px;
+  }
+  .section-num {
+    background: var(--primary) !important;
+    color: white !important;
+  }
+  .section-header h2 { color: var(--primary) !important; }
+  .section-badge { border: 1px solid currentColor; }
+
+  /* Suggested/info boxes keep color */
+  .suggested {
+    background: #f0f9f0 !important;
+    border-color: #c8e6c9 !important;
+  }
+  .suggested h4 { color: #34a853 !important; }
+  .suggested h4::before { background: #34a853 !important; color: white !important; }
+  .info-box { background: #eef4fb !important; border-color: #d6e4f0 !important; }
+  .info-box h4 { color: var(--primary) !important; }
+  .info-box h4::before { background: var(--primary) !important; color: white !important; }
+
+  /* Textareas visible for print-and-fill */
+  textarea { border: 1px solid #ccc !important; min-height: 50px !important; }
+  .verify-top input[type="checkbox"] { accent-color: var(--accent) !important; }
+
+  /* Intro card */
+  .intro { border: 1px solid #ddd; page-break-inside: avoid; }
+  .intro::before { background: linear-gradient(90deg, var(--accent), var(--primary)) !important; }
+  .stat .num { color: var(--primary) !important; }
+
+  /* Footer */
+  .footer-note { padding: 12px 0 0; font-size: 8pt; }
+
+  /* Prevent orphaned headings */
+  h3, h4 { page-break-after: avoid; }
+  ul, ol, table, blockquote { page-break-inside: avoid; }
+}
+
+</style>
+</head>
+<body>
+
+<div class="top-nav">
+  <a href="index.html"><span class="nav-arrow">&larr;</span> Back to Portal</a>
+  <span class="nav-brand">NuLite</span>
+</div>
+
+<div class="hero">
+  <div class="hero-logo"><img src="https://www.electricboatsboston.com/wp-content/uploads/2020/11/BEB-LOGO-2-1-2048x2048-1-e1626885368128-300x300.png" alt="Boston Electric Boats"></div>
+  <h1>Boston Electric Boats</h1>
+  <p>Brand Brief</p>
+</div>
+
+<div class="container container--wide">
+  <div class="report-body">
+    <h3>Company Overview</h3>
+<ul>
+<li><strong>Name:</strong> Boston Electric Boats (BEB)</li>
+<li><strong>Founded:</strong> 2021 by Patrick Rourke</li>
+<li><strong>Location:</strong> Lewis Wharf, 28 Atlantic Ave, Boston, MA 02110</li>
+<li><strong>Phone:</strong> 617-981-5684</li>
+<li><strong>Email:</strong> info@electricboatsboston.com</li>
+<li><strong>Hours:</strong> 10am&ndash;8pm, 7 days/week (May &ndash; October)</li>
+<li><strong>Website:</strong> <a href="https://www.electricboatsboston.com/" target="_blank">electricboatsboston.com</a></li>
+<li><strong>Booking platform:</strong> <a href="https://book.peek.com/s/5d8596dd-850b-480c-ad10-79bfb41df773/ddyzq" target="_blank">Peek</a></li>
+<li><strong>Website agency:</strong> <a href="https://nerdmarketing.ca/en/home/" target="_blank">Nerd Marketing</a></li>
+</ul>
+<h4>What They Do</h4>
+<p>Electric boat rentals in Boston Harbor. Two rental types plus add-on services.</p>
+<h4>Unique Selling Points</h4>
+<ul>
+<li>Only boat rental in Boston where you captain your own boat without a license</li>
+<li>Fully electric &mdash; quiet, zero emissions, eco-friendly</li>
+<li>Private group experience (friends, family, colleagues)</li>
+<li>BYO food, drinks, and playlist</li>
+<li>Digital navigation screen with preset harbor route</li>
+<li>Full walkthrough before every departure</li>
+<li>Scenic Boston Harbor routes and skyline views</li>
+</ul>
+<h4>Company Values</h4>
+<p>1. <strong>Guest Experience First</strong> &mdash; every outing designed to be simple, thoughtful, and memorable</p>
+<p>2. <strong>Clean, Quiet & Sustainable</strong> &mdash; electric power, good for the harbor</p>
+<p>3. <strong>Teamwork & Respect</strong> &mdash; tight-knit crew, collaboration, every guest treated like VIP</p>
+<p>4. <strong>Safety Without Compromise</strong> &mdash; clear briefings, smart systems</p>
+<p>5. <strong>Boating for Everyone</strong> &mdash; no experience needed, everyone welcome</p>
+<h4>Mission</h4>
+<p>"Boating should be fun, easy, and for everyone."</p>
+<h4>Origin Story</h4>
+<p>Realized private boating options in Boston were limited and exclusive. Launched a fleet of clean, quiet electric boats with a mission to help more people experience the harbor. Built around the idea that getting on the water should feel effortless and be unforgettable.</p>
+<hr>
+<h3>Products & Pricing</h3>
+<h4>Rental Tiers (3 options + gift)</h4>
+<p>All rentals are <strong>2 hours</strong>. "From" prices are minimums &mdash; actual ticket price varies by time slot. State tax (~6.25%) and Peek convenience fee (~6.3%) are added at checkout.</p>
+<table>
+<tr><th>Tier</th><th>Capacity</th><th>Weekday From</th><th>Weekend From</th><th>Example All-In (Weekend)</th></tr>
+<tr><td><strong>Be Your Own Captain</strong></td><td>Up to 6</td><td>$439</td><td>$469</td><td><strong>$518.94</strong> (tickets $460.95 + tax $28.81 + fee $29.18)</td></tr>
+<tr><td><strong>Be Your Own Captain</strong></td><td>Up to 12</td><td>$519</td><td>$559</td><td><strong>$671.84</strong> (tickets $596.85 + tax $37.30 + fee $37.69)</td></tr>
+<tr><td><strong>Captain Provided Charter</strong></td><td>Up to 6</td><td>$639</td><td>$659</td><td><strong>$762.40</strong> (tickets $677.34 + tax $42.33 + fee $42.73)</td></tr>
+</table>
+<p><strong>There is no "Captain Provided 12 pax" option.</strong> Federal law (USCG "Six-Pack" / OUPV license) limits uninspected charter vessels to a maximum of 6 paying passengers when operated by a hired captain. BYOC rentals aren't subject to this limit because no paid captain is aboard &mdash; you're renting the boat, not hiring a charter.</p>
+<p><strong>Gift a Cruise!</strong> &mdash; gift card / gift certificate option also available via booking widget.</p>
+<p><strong>Note:</strong> The Boat Rentals page previously showed a flat "$499" for BYOC &mdash; this appears to be a simplified display. The FAQ and booking widget show the full weekday/weekend breakdown above. Pricing confirmed from FAQ answers + Peek checkout screenshots (Apr 2026).</p>
+<p>#### Be Your Own Captain (6 or 12 pax)</p>
+<ul>
+<li>No boating license required &mdash; captain must be 21+</li>
+<li>You or a member of your group takes the wheel</li>
+<li>BYO food and drinks encouraged</li>
+<li>Digital nav screen with preset route + full walkthrough before departure</li>
+<li>Top speed 6 MPH &mdash; easy and safe to operate</li>
+</ul>
+<p>#### Captain-Provided Charter (6 pax)</p>
+<ul>
+<li>Licensed captain navigates for you</li>
+<li>Sit back, relax, enjoy the ride</li>
+<li>BYO snacks and drinks allowed</li>
+<li>"You can focus on more important things, like salami & cheese" (actual Peek description)</li>
+</ul>
+<p>#### Additional Fees</p>
+<table>
+<tr><th>Fee</th><th>Amount</th><th>Notes</th></tr>
+<tr><td>MA State Tax</td><td>~6.25%</td><td>Applied to ticket price</td></tr>
+<tr><td>Peek Convenience Fee</td><td>~6.3%</td><td>Processing fee</td></tr>
+<tr><td>Reduce Your Liability Insurance</td><td>$50 (optional)</td><td>Reduces damage liability from $2,500 to $500</td></tr>
+<tr><td>Peek Protect</td><td>Optional at checkout</td><td>Full refund for any cancellation reason (24hr notice required)</td></tr>
+</table>
+<h4>Add-Ons</h4>
+<table>
+<tr><th>Item</th><th>Price</th><th>Notes</th></tr>
+<tr><td>Ice for cooler</td><td>$16</td><td>Yeti cooler onboard stays cold</td></tr>
+<tr><td>Coozie</td><td>$2</td><td>Regular or slim can</td></tr>
+<tr><td>Captain's Hat</td><td>$12</td><td>Look the part</td></tr>
+<tr><td>Charcuterie</td><td>$89&ndash;$189</td><td>By Boards for Days, 48hr notice</td></tr>
+<tr><td>Brunch Charcuterie</td><td>$99&ndash;$199</td><td>Pastries, spreads, meats, cheeses, fruit, 48hr notice</td></tr>
+<tr><td>Veggie Platter</td><td>$49&ndash;$89</td><td>Fresh cut veggies & dip, 48hr notice</td></tr>
+</table>
+<h4>Boat Features</h4>
+<ul>
+<li>Quiet, electric-powered (no noise, no fumes)</li>
+<li>Boats available in 6-passenger and 12-passenger capacity</li>
+<li>Cooler onboard (ice available for additional charge)</li>
+<li>Bluetooth radio with multiple speakers &mdash; sync your playlist</li>
+<li>Digital navigation screen with preset harbor route</li>
+<li>Life jackets provided for all passengers (under seat cushions; kids under 12 must wear at all times)</li>
+<li>Canopies permanently attached with full window enclosures (removable side windows for breeze)</li>
+<li>Open back deck area for sun</li>
+<li>No-shoe policy onboard (shoe basket provided)</li>
+<li>Simple to operate &mdash; full crew tutorial before departure</li>
+</ul>
+<hr>
+<h3>Brand Identity</h3>
+<h4>Color Palette</h4>
+<table>
+<tr><th>Role</th><th>Color</th><th>Hex</th></tr>
+<tr><td>Primary Accent</td><td>Magenta/Pink</td><td><code>#cb007c</code></td></tr>
+<tr><td>Primary Dark</td><td>Navy</td><td><code>#001e48</code></td></tr>
+<tr><td>Text (on dark)</td><td>White</td><td><code>#ffffff</code></td></tr>
+<tr><td>Body Text</td><td>Light Gray</td><td><code>#d2d2d2</code></td></tr>
+<tr><td>Background (alt)</td><td>Charcoal</td><td><code>#0f0f0f</code></td></tr>
+</table>
+<p><strong>Usage patterns:</strong></p>
+<ul>
+<li>Dark navy backgrounds with white text as default</li>
+<li>Magenta for hover states, CTAs, selection highlights, links</li>
+<li>Buttons: transparent bg, 2px solid white border, uppercase text</li>
+<li>Hover: white bg with navy or magenta text</li>
+<li>Selection highlight: magenta bg with white text</li>
+</ul>
+<h4>Typography</h4>
+<table>
+<tr><th>Role</th><th>Font</th><th>Weight</th><th>Style</th></tr>
+<tr><td>Body</td><td>Gotham Book</td><td>400</td><td>Normal</td></tr>
+<tr><td>Headings</td><td>Gotham Bold</td><td>700</td><td>Uppercase</td></tr>
+<tr><td>Fallback</td><td>Helvetica, Arial, sans-serif</td><td>&mdash;</td><td>&mdash;</td></tr>
+</table>
+<p><strong>Sizing:</strong></p>
+<ul>
+<li>H1: 80px (5rem)</li>
+<li>H2: 40px (2.5rem)</li>
+<li>H3: 32px (2rem)</li>
+<li>Body: 16px (1rem)</li>
+<li>Buttons/Links: 14px (0.875rem), uppercase, letter-spacing: 2px</li>
+</ul>
+<h4>Logo</h4>
+<ul>
+<li>BEB geometric mark</li>
+<li>Primary: 135x135px, Tablet: 100x100px, Mobile: 75x75px</li>
+<li>File: <code>BEB-LOGO-2-1-2048x2048-1-e1626885368128.png</code></li>
+<li>Alt text: "Electric Boats Boston, electric boat rentals and sales in Boston Harbor"</li>
+</ul>
+<h4>Visual Style</h4>
+<ul>
+<li><strong>Aesthetic:</strong> Modern dark theme, luxury-casual</li>
+<li><strong>Feel:</strong> Professional yet approachable, lifestyle-focused</li>
+<li><strong>Photography:</strong> Harbor/water scenes, group experiences, Boston skyline, harbor map</li>
+<li><strong>Mood:</strong> Premium but accessible, experiential, social</li>
+</ul>
+<h4>Voice & Tone</h4>
+<ul>
+<li><strong>Tone:</strong> Confident, inviting, experience-driven, casual but professional</li>
+<li><strong>Primary headline:</strong> "PRIVATE BOATING. ZERO STRESS. PURE FUN."</li>
+<li><strong>Taglines:</strong></li>
+<li>"The premier Electric Boat Rentals in Boston Harbor"</li>
+<li>"The best way to experience Boston Harbor"</li>
+<li>"Be your own captain"</li>
+<li>"A FLOATING SOCIAL ADVENTURE AWAITS"</li>
+<li>"AN ELECTRIC WAY TO EXPERIENCE BOSTON HARBOR"</li>
+<li><strong>Themes:</strong> Experience, memory-making, groups, Boston Harbor, eco-friendly, effortless, unforgettable</li>
+<li><strong>Audience framing:</strong> Friends, family, colleagues &mdash; always group-oriented</li>
+<li><strong>CTAs:</strong> "BOOK NOW", "BOOK A BOAT NOW"</li>
+</ul>
+<h4>Guest Testimonials</h4>
+<ul>
+<li><em>"We celebrated a birthday on the water and it was perfect&mdash;easy to drive, amazing views, and super chill."</em> &mdash; Emily R.</li>
+<li><em>"Such a fun and different way to see Boston. Everyone had a blast, and it was way easier than I expected."</em> &mdash; Marcus T.</li>
+</ul>
+<hr>
+<h3>Digital Presence</h3>
+<h4>Website</h4>
+<ul>
+<li><strong>Platform:</strong> WordPress + Astra theme + Elementor + WooCommerce</li>
+<li><strong>Last modified:</strong> 2026-02-06</li>
+</ul>
+<p><strong>Full sitemap:</strong></p>
+<table>
+<tr><th>Page</th><th>URL</th></tr>
+<tr><td>Home</td><td>/</td></tr>
+<tr><td>About Us</td><td>/about-us/</td></tr>
+<tr><td>Boat Rentals MA</td><td>/boat-rentals-ma/</td></tr>
+<tr><td>Gallery</td><td>/gallery/</td></tr>
+<tr><td>FAQ</td><td>/faq/</td></tr>
+<tr><td>Buy a Boat</td><td>/buy-a-boat/</td></tr>
+<tr><td>Blog</td><td>/blog/</td></tr>
+<tr><td>Contact Us</td><td>/contact-us/</td></tr>
+<tr><td>Join Our Team</td><td>/join-our-team/</td></tr>
+<tr><td>Cancellation Policy</td><td>/cancellation-policy</td></tr>
+<tr><td>Book Now</td><td>book.peek.com (external)</td></tr>
+</table>
+<h4>Social Media</h4>
+<table>
+<tr><th>Platform</th><th>Handle</th><th>URL</th><th>Stats</th></tr>
+<tr><td>Instagram</td><td>@bostonelectricboats</td><td>instagram.com/bostonelectricboats</td><td>22K followers, 426 posts</td></tr>
+<tr><td>TikTok</td><td>@bostonelectricboats</td><td>tiktok.com/@bostonelectricboats</td><td>&mdash;</td></tr>
+<tr><td>Facebook</td><td>/bostonelectricboats</td><td>facebook.com/bostonelectricboats</td><td>&mdash;</td></tr>
+<tr><td>LinkedIn</td><td>/company/boston-electric-boats</td><td>linkedin.com/company/boston-electric-boats</td><td>&mdash;</td></tr>
+<tr><td>Pinterest</td><td>/wx2/boston-electric-boats</td><td>pinterest.com/wx2/boston-electric-boats</td><td>&mdash;</td></tr>
+</table>
+<h4>Review Sites</h4>
+<ul>
+<li><strong>Yelp:</strong> 25 photos, 10 reviews</li>
+<li><strong>TripAdvisor:</strong> <a href="https://www.tripadvisor.com/Attraction_Review-g60745-d23319601-Reviews-Boston_Electric_Boats-Boston_Massachusetts.html" target="_blank">Listed</a></li>
+</ul>
+<hr>
+<h3>FAQ &mdash; Full Answers (35 Q&As)</h3>
+<p><em>Extracted via Playwright scraper on 2026-03-19. All answers are verbatim from the website.</em></p>
+<h4>Boats & Cruising (12 questions)</h4>
+<p><strong>Is the boat easy to drive / is experience required?</strong></p>
+<p>Yes, the boat is quite simple and easy to operate, with a top speed of only 6MPH you will have ample time to steer and maneuver as you navigate the Harbor. The designated captain must be 21 years or older and will have signed off on viewing our Cruising Rules, Guidelines and Safety Checklist. The captain and entire group will also receive a tutorial from one of our crew members on the dock before heading out. Each boat is equipped with a detailed map and a navigation system that will allow you to simply follow a pre-programmed route around the inner harbor.</p>
+<p><strong>What is the passenger limit per boat?</strong></p>
+<p>We have boats that have a total capacity of 6 passengers and 12 passengers. There is no flexibility on the total capacity. For larger groups please reach out as we may be able to accommodate a multi-boat booking.</p>
+<p><strong>Is there music on the boat?</strong></p>
+<p>Yes, the boats have a Bluetooth radio with multiple speakers so you can sync up your favorite playlist.</p>
+<p><strong>Are there bathrooms on the boats?</strong></p>
+<p>No, the boats do not have toilets, there is a porta-potty on our property if anyone needs to go before or after your cruise. If a bathroom break is needed when out on your cruise you can come back to our dock or you can stop at one of the designated restrooms along the route. Legal Harborside in Seaport, Reelhouse restaurant in East Boston and Encore Boston in Everett are all designated docking locations you can stop at for a bathroom break. There must be a dock attendant on site to help you dock.</p>
+<p><strong>Are the boats handicap accessible?</strong></p>
+<p>Our boats are not specifically designed for handicap accessibility. Please call for more information and we will do our best to accommodate.</p>
+<p><strong>What can we bring on the boat?</strong></p>
+<p>You can bring your own food and drinks, each boat has a cooler and ice is available upon request for additional charge. Please no glassware or glass drinking bottles on the boat. No straight hard alcohol is permitted on the boat, seltzer, beer and wine only.</p>
+<p><strong>What should we wear?</strong></p>
+<p>You should wear whatever you'd like, the temperature tends to be a bit cooler out on the water so we recommend you to bring an extra layer or two. The windows on the boat offer protection from the wind on cooler days and allow for a breeze on the warmer days.</p>
+<p><strong>What kind of shoes should we wear?</strong></p>
+<p>You should wear any type of shoes you'd like, boat shoes or any rubber sole sneaker is encouraged for safely walking on the dock/boarding the boat, sandals or flip flops are not as safe as they allow more opportunity for tripping.</p>
+<p><strong>What is your no-shoe policy?</strong></p>
+<p>In an attempt to keep our boats in pristine condition we've implemented a no shoe policy once aboard our boats. We ask that all guests respect this policy as long as they are comfortable with it. We provide a shoe basket on each boat for storing your shoes while on your cruise.</p>
+<p><strong>Do the canopies come off?</strong></p>
+<p>No the canopies are permanently attached but you are welcome to open the side window enclosures and let the breeze flow through the boat. We will show you and your group how to do this before you head out for your cruise. If you are looking to soak up some sun, the back deck area will be your spot.</p>
+<p><strong>How much of the harbor will we see?</strong></p>
+<p>You will see what is called the Inner Harbor which stretches from Charlestown to Seaport with East Boston and the backdrop of the cityscape in between. If you choose the route to the Casino you will cruise under the Tobin Bridge, up the Mystic River and your turnaround point will be up close and personal with the backside of the casino.</p>
+<p><strong>Can I load, setup and/or decorate the boat while I wait for the rest of my group?</strong></p>
+<p>We suggest that you and your entire group are gathered by our gate and ready at your scheduled booking time. Please plan an additional 15-20 minutes for any setup/decoration time and we will do our best to have the boat ready for you.</p>
+<h4>Safety & Restrictions (12 questions)</h4>
+<p><strong>Are life jackets provided?</strong></p>
+<p>Yes, there is a life jacket for each passenger on the boat at all times, the life jackets are located under the seat cushions within the main seating area. For kids under the age of 12 life jackets will be available, but please feel free to bring your own if you prefer, please note it must be a proper type II life jacket.</p>
+<p><strong>Is there an age limit?</strong></p>
+<p>No, all ages are welcome, you must be at least 21 years of age in order to book a "Be Your Own Captain Rental" and captain the boat yourself. Kids under the age of 12 must wear a life jacket at all times while on the dock and on the boat.</p>
+<p><strong>Are pets/dogs allowed on the boat?</strong></p>
+<p>Although we love all animals unfortunately no pets are allowed on our boats.</p>
+<p><strong>What if there is damage to the boat during our cruise?</strong></p>
+<p>We will assess the damage and charge the person/party accordingly. We offer an optional reduce your liability insurance for $50 that covers incidental damages to the boat reducing any out of pocket expense from $2,500 to $500. This does not cover negligence or liability towards other parties and this does not cover damage caused to the boat from not following our cruising rules outlined in the rental agreement/waiver.</p>
+<p><strong>Can we dock anywhere and/or pick-up or drop-off passengers during our cruise?</strong></p>
+<p>You can only dock our boats at designated docks which are outlined on our Harbor map, these docks have attendants that will be there to help upon arrival. This is for your safety and for the boat's safety. When approaching any dock, use extreme caution and approach very slowly, don't forget to have a line ready to hand-off to the dock attendant.</p>
+<p><strong>Can we take the boat into the Charles River?</strong></p>
+<p>No, boats need to stay within the marked territory and are not allowed to travel through the locks into the Charles River. This would result in an instant termination of your rental and additional fees charged.</p>
+<p><strong>Can we take the boat past the Hyatt Logan Airport / Legal's Harborside?</strong></p>
+<p>No, this is the furthest point you can travel as you head out toward Castle Island/the Outer Harbor. This territory line is clearly marked on your guide map and navigation screen.</p>
+<p><strong>What are we allowed to bring on the boat?</strong></p>
+<p>The rentals and charters are BYOB so you are welcome to bring your own food and drinks. We ask that you do not bring any glass drinking bottles or glassware of any kind. If you do and glass is broken on the boat we will charge a cleanup fee. No hard alcohol is permitted on our boats. Safety of our passengers is our top priority and we reserve the right to restrict customers who decide to show up with an excessive amount of alcohol. Please drink responsibly. You may not bring firearms, illegal drugs, anything that can be lit (i.e., candles, grills, cook tops) fireworks, any flammable liquid/gel/aerosol and/or dangerous chemicals. There is no smoking of any kind permitted on our boats.</p>
+<p><strong>What do we do if there is a problem with the boat during my rental?</strong></p>
+<p>If you have a problem with the boat during your rental, please contact the dock by calling the dock phone. We will troubleshoot the problem and decide if you need to head back to the dock or in the event of a break down we will come out and tow you back in.</p>
+<p><strong>Can we drop anchor and chill in one spot?</strong></p>
+<p>No you are not allowed to anchor the boat anywhere in the harbor, although it is ok for you to float while the boat is in neutral gear. This can be during sunset or anytime you find a space without much traffic or other boats around. We have some locations marked on the map where this would make the most sense. You are still responsible for any oncoming traffic and should be aware of your surroundings at all times.</p>
+<p><strong>Can we swim off of the boat?</strong></p>
+<p>No, there is no swimming off of the boats, there is no swim ladder making it very difficult to get back into the boat. It is also dangerous to swim in the harbor due to the boat traffic. There is no hanging off of the boat to dip legs or arms into the water, it is important the inside of the boat stays dry to protect the batteries.</p>
+<p><strong>Can we fish off of the boat?</strong></p>
+<p>No, there is absolutely no fishing allowed from any of our boats.</p>
+<h4>Day of Your Booking (6 questions)</h4>
+<p><strong>When should we arrive?</strong></p>
+<p>We suggest that you and your group arrive 10-15 minutes before your scheduled booking time. This will allow for your group to be gathered and ready to begin your pre-cruise overview and guarantee your full 2 hours of cruise time. If you and your entire group do not arrive at or before your scheduled booking time your total cruise time may be reduced.</p>
+<p><strong>Where should we park?</strong></p>
+<p>The closest parking lot is located on the property of Lewis Wharf and there is a parking garage and additional parking lots within walking distance.</p>
+<p><strong>What is your weather related cancellation policy?</strong></p>
+<p>Since our boats are covered with canopies and have full window enclosures, we continue to operate during cooler weather and/or rain showers. Reservations are cancelled if weather is considered too dangerous or unsafe to navigate the harbor (for example; high winds, heavy rain storms, severe lightning or rough seas). Bookings that are cancelled by Boston Electric Boats due to severe weather or unsafe conditions are eligible for a rain check and may be rescheduled for a later date with no fee applied. If a refund is requested a refund will be issued, a 10% processing fee will apply. An activity protection plan is available at the time of checkout. Choose the Peek Protect option to be eligible for a refund when cancelling at any time and for any reason leading up to your booking, at least 24 hours of notice required.</p>
+<p><strong>What is your non-weather related cancellation policy?</strong></p>
+<p>We have a cancellation & reschedule freeze period of 4 days leading up to your booking date & time, if you decide to cancel your booking within that freeze period you will not be eligible for a refund. If you cancel prior to the 4 day freeze period you will be eligible for a refund less a $100 cancellation fee. If you cancel and would like to reschedule to a later date, a $50 rescheduling fee may apply. An activity protection plan is available at the time of checkout. Choose the Peek Protect option to be eligible for a refund when cancelling at any time and for any reason leading up to your booking, at least 24 hours of notice required.</p>
+<p><strong>Can we decorate the boat for a special occasion?</strong></p>
+<p>We are so happy you've decided to celebrate a special occasion with us and we would love to help you make it as amazing and as memorable as we possibly can. Please reach out to us ahead of time so we can coordinate and plan accordingly.</p>
+<p><strong>What should we bring the day of our rental?</strong></p>
+<p>Prior to your booking, please ensure that the Rental Waiver was reviewed and signed online by everyone in your group. The person who booked or plans to be the captain must bring a valid driver's license. We also suggest bringing food and drinks, sunglasses, sunscreen, an extra layer of clothing and your favorite playlist.</p>
+<h4>Pricing & Payment (5 questions)</h4>
+<p><strong>How can I book a corporate outing?</strong></p>
+<p>Our boats make for an excellent corporate outing and/or team building activity. Whether one boat or multiple boats in order to accommodate the entire company or team we are happy to help. We can host groups of up to 72 with a multi-boat reservation. Please reach out for more info and scheduling.</p>
+<p><strong>Can I book more than one boat at a time?</strong></p>
+<p>Yes, you can book up to 6 boats at one time which will accommodate groups of up to 72 total. Please reach out to make this request and we will do our best to accommodate. The boats can cruise the harbor together while remaining a safe distance apart refraining from any unsafe actions, specifically getting too close to one another. There is no tying up/rafting the boats together.</p>
+<p><strong>How does pricing vary between weekends & week days?</strong></p>
+<p>Captain Provided Charter (Up to 6 passengers): Weekday rates from $639, weekend rates from $659. Be Your Own Captain (Up to 6 passengers): Weekday rates from $439, weekend rates from $469. Be Your Own Captain (Up to 12 passengers): Weekday rates from $519, weekend rates from $559.</p>
+<p><strong>Are there any extra fees besides the rental rate?</strong></p>
+<p>Yes, a MA state sales tax and a processing fee will be applied to your total. At the time of booking you are given an option for a $50 Reduce Your Liability Insurance, this reduces your financial responsibility for any damages caused to the boat from $2,500 down to $500.</p>
+<p><strong>When will my card be charged?</strong></p>
+<p>Your card will be charged in full for your reservation at the time of booking.</p>
+<hr>
+<h3>Client Needs (Pending Meeting)</h3>
+<p>1. <strong>Social media marketing automation</strong> &mdash; content scheduling, posting strategy</p>
+<p>2. <strong>Content generation</strong> &mdash; videos, graphics, captions that match brand identity</p>
+<p>3. <strong>Release plans & strategy</strong> &mdash; seasonal campaigns, posting cadence</p>
+<p>4. <strong>Website chatbot</strong> &mdash; LLM-powered Q&A for customer questions (FAQ, booking, pricing)</p>
+<p>5. <strong>Brand-consistent design tool</strong> &mdash; generate social media visuals on-brand</p>
+<h4>Meeting Prep Questions</h4>
+<ul>
+<li>What's the current posting cadence and who manages it?</li>
+<li>What content types perform best on Instagram? (reels, carousels, stories?)</li>
+<li>Booking flow runs through Peek &mdash; any friction or issues with it?</li>
+<li>What questions do customers ask most? (chatbot training data)</li>
+<li>~~Can we get the full FAQ answers?~~ <strong>DONE</strong> &mdash; all 35 FAQ answers extracted via Playwright</li>
+<li>Any existing brand guidelines or asset library beyond the website?</li>
+<li>What's the marketing budget / ad spend situation?</li>
+<li>Seasonal patterns &mdash; when does demand peak vs. need promotion?</li>
+<li>Any competitor concerns? Other electric boat rentals entering the market?</li>
+<li>Goals: more bookings? brand awareness? repeat customers? corporate events?</li>
+<li>What tools/platforms does Patrick currently use for marketing?</li>
+<li>Who is Nerd Marketing and what's their ongoing role?</li>
+<li>Is "Buy a Boat" an active sales channel? (4 Duffy models listed: $65.5K&ndash;$72.9K)</li>
+<li>Any video content already created? (for TikTok/Reels strategy)</li>
+<li>Would Patrick be open to UGC (user-generated content) campaigns?</li>
+</ul>
+<hr>
+<p><em>Data sources: Playwright scrape of 8+ pages (2026-03-19), Peek checkout screenshots (Apr 2026 pricing), web search, WebFetch CSS analysis. Raw scrape data: <code>BostonElectricBoats/scrape-results.json</code>, <code>scrape-faq-results.json</code>, <code>scrape-faq-v2-results.json</code>. KV keys: <code>beb.</em></code> (20+ entries).*</p>
+
+  </div>
+
+  <div class="actions">
+    <button class="btn btn-primary" onclick="window.print()">Print / Save as PDF</button>
+  </div>
+  <div class="footer-nav">
+    <a href="index.html"><span>&larr;</span> Back to Portal</a>
+  </div>
+  <p class="footer-note">Prepared by NuLite &bull; March 2026</p>
+</div>
+
+</body>
+</html>
