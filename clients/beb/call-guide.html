@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Boston Electric Boats — Call Guide</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+  :root {
+    --navy: #001e48;
+    --navy-light: #002a6b;
+    --magenta: #cb007c;
+    --magenta-dark: #a30064;
+    --magenta-light: #f5e0ef;
+    --white: #ffffff;
+    --gray-50: #f8f9fb;
+    --gray-100: #f0f2f5;
+    --gray-200: #e2e5ea;
+    --gray-300: #d2d2d2;
+    --gray-500: #777;
+    --gray-700: #444;
+    --green-bg: #f0f9f0;
+    --green-border: #34a853;
+    --blue-bg: #eef4fb;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    background: var(--gray-50);
+    color: #1a1a2e;
+    line-height: 1.65;
+    font-size: 15px;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Top nav */
+  .top-nav {
+    background: #0f0f0f;
+    padding: 10px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .top-nav a {
+    color: rgba(255,255,255,0.7);
+    text-decoration: none;
+    font-size: 0.78em;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: color 0.2s;
+  }
+  .top-nav a:hover { color: white; }
+  .top-nav .nav-brand {
+    color: rgba(255,255,255,0.4);
+    font-size: 0.68em;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    font-weight: 600;
+  }
+
+  /* Hero */
+  .hero {
+    background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 50%, var(--navy) 100%);
+    color: var(--white);
+    padding: 40px 24px 36px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0; right: 0;
+    height: 40px;
+    background: var(--gray-50);
+    clip-path: ellipse(55% 100% at 50% 100%);
+  }
+  .hero-logo {
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    margin: 0 auto 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+  .hero-logo img { width: 100%; height: 100%; object-fit: cover; }
+  .hero h1 {
+    font-size: 1.5em;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    margin-bottom: 6px;
+  }
+  .hero p { color: var(--gray-300); font-size: 0.92em; }
+  .hero .accent { color: var(--magenta); }
+
+  /* Progress */
+  .progress-wrap {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--white);
+    border-bottom: 1px solid var(--gray-200);
+    padding: 10px 24px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  }
+  .progress-bar { flex: 1; height: 6px; background: var(--gray-200); border-radius: 3px; overflow: hidden; }
+  .progress-fill { height: 100%; background: linear-gradient(90deg, var(--magenta), #e8408f); border-radius: 3px; width: 0%; transition: width 0.4s ease; }
+  .progress-text { font-size: 0.75em; color: var(--gray-500); font-weight: 600; white-space: nowrap; min-width: 90px; text-align: right; }
+
+  /* Layout */
+  .container { max-width: 760px; margin: 0 auto; padding: 24px 20px 60px; }
+
+  /* Intro */
+  .intro {
+    background: var(--white);
+    border-radius: 16px;
+    padding: 28px;
+    margin-bottom: 28px;
+    border: 1px solid var(--gray-200);
+    position: relative;
+    overflow: hidden;
+  }
+  .intro::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--magenta), var(--navy));
+  }
+  .intro h3 { color: var(--navy); font-size: 1.1em; margin-bottom: 10px; }
+  .intro p { margin-bottom: 8px; font-size: 0.92em; color: var(--gray-700); }
+  .intro .highlight { color: var(--magenta); font-weight: 600; }
+
+  /* Sections */
+  .section {
+    background: var(--white);
+    border-radius: 16px;
+    margin-bottom: 20px;
+    border: 1px solid var(--gray-200);
+    overflow: hidden;
+    transition: box-shadow 0.2s;
+  }
+  .section:hover { box-shadow: 0 4px 20px rgba(0,0,0,0.06); }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 20px 28px;
+    border-bottom: 1px solid var(--gray-100);
+  }
+  .section-num {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: var(--navy);
+    color: var(--white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.85em;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+  .section-header h2 {
+    font-size: 1.05em;
+    font-weight: 700;
+    color: var(--navy);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    flex: 1;
+  }
+  .section-badge {
+    font-size: 0.65em;
+    padding: 3px 10px;
+    border-radius: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    white-space: nowrap;
+  }
+  .badge-discuss { background: var(--magenta-light); color: var(--magenta); }
+  .badge-confirm { background: var(--green-bg); color: var(--green-border); }
+
+  .section-body { padding: 24px 28px 28px; }
+
+  /* Questions */
+  .q-item {
+    display: flex;
+    gap: 14px;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--gray-100);
+  }
+  .q-item:last-child { border-bottom: none; }
+
+  .q-item input[type="checkbox"] {
+    width: 22px;
+    height: 22px;
+    accent-color: var(--magenta);
+    flex-shrink: 0;
+    margin-top: 1px;
+    cursor: pointer;
+  }
+
+  .q-content { flex: 1; }
+  .q-text {
+    font-size: 0.92em;
+    font-weight: 600;
+    color: var(--navy);
+    margin-bottom: 2px;
+  }
+  .q-hint {
+    font-size: 0.8em;
+    color: var(--gray-500);
+    font-style: italic;
+  }
+
+  /* Context note */
+  .context-note {
+    background: var(--blue-bg);
+    border-radius: 10px;
+    padding: 16px 18px;
+    margin-bottom: 16px;
+    font-size: 0.85em;
+    border: 1px solid #d6e4f0;
+    color: var(--gray-700);
+  }
+  .context-note strong { color: var(--navy); }
+
+  /* Tip */
+  .tip-box {
+    background: var(--green-bg);
+    border-radius: 10px;
+    padding: 14px 18px;
+    margin-bottom: 16px;
+    font-size: 0.82em;
+    border: 1px solid #c8e6c9;
+    color: #2e7d32;
+    display: flex;
+    gap: 8px;
+    align-items: flex-start;
+  }
+
+  /* Footer */
+  .footer-nav { text-align: center; padding: 8px 0 0; }
+  .footer-nav a {
+    color: var(--navy);
+    text-decoration: none;
+    font-size: 0.82em;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 10px 24px;
+    border: 1.5px solid var(--gray-200);
+    border-radius: 8px;
+    transition: all 0.2s;
+  }
+  .footer-nav a:hover { border-color: var(--navy); background: var(--gray-50); }
+  .footer-note {
+    text-align: center;
+    color: var(--gray-500);
+    font-size: 0.75em;
+    padding: 16px 0 40px;
+    letter-spacing: 0.5px;
+  }
+
+  /* Print */
+  @page { margin: 0.4in 0.5in; size: letter; }
+  @media print {
+    * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+    body { background: white; font-size: 12pt; }
+    .top-nav, .progress-wrap, .footer-nav { display: none !important; }
+    .hero {
+      background: linear-gradient(135deg, var(--navy), var(--navy-light)) !important;
+      margin: 0 -0.5in; padding: 24px 0.5in 18px; width: calc(100% + 1in);
+      overflow: visible !important;
+    }
+    .hero::after { display: none; }
+    .hero h1 { font-size: 1.3em; color: white !important; }
+    .section { page-break-inside: avoid; }
+    .section-num { background: var(--navy) !important; color: white !important; }
+  }
+</style>
+</head>
+<body>
+
+<div class="top-nav">
+  <a href="index.html"><span>&larr;</span> Back to Portal</a>
+  <span class="nav-brand">Nulite</span>
+</div>
+
+<div class="hero">
+  <div class="hero-logo"><img src="https://www.electricboatsboston.com/wp-content/uploads/2020/11/BEB-LOGO-2-1-2048x2048-1-e1626885368128-300x300.png" alt="Boston Electric Boats"></div>
+  <h1>Boston Electric Boats</h1>
+  <p>Discovery Call Guide <span class="accent">&mdash;</span> Let's Get Aligned</p>
+</div>
+
+<div class="progress-wrap">
+  <div class="progress-bar"><div class="progress-fill" id="progFill"></div></div>
+  <div class="progress-text" id="progText">0 / 32 covered</div>
+</div>
+
+<div class="container">
+
+<div class="intro">
+  <h3>Hey Patrick!</h3>
+  <p>We've already done a deep dive on BEB — your website, FAQ (all 35 answers), pricing via Peek, customer reviews, competitor landscape, and more. <span class="highlight">Most of the groundwork is done.</span></p>
+  <p>This call is about the stuff only you know — your goals, how you currently operate, and how you want the chatbot and social media to work. We'll check items off as we go.</p>
+  <p>You can also check out everything we've prepared at your <span class="highlight">Client Portal</span> — all the research, brand brief, and the full enrichment questionnaire are there.</p>
+</div>
+
+<!-- ===== SECTION 1 ===== -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">1</div>
+    <h2>Goals & Big Picture</h2>
+    <span class="section-badge badge-discuss">Let's Discuss</span>
+  </div>
+  <div class="section-body">
+    <div class="q-item">
+      <input type="checkbox" class="q-check">
+      <div class="q-content">
+        <div class="q-text">What are your main goals right now?</div>
+        <div class="q-hint">More bookings? Brand awareness? Repeat customers? Growing corporate events?</div>
+      </div>
+    </div>
+    <div class="q-item">
+      <input type="checkbox" class="q-check">
+      <div class="q-content">
+        <div class="q-text">When are your peak vs slow booking periods?</div>
+        <div class="q-hint">Which months are packed? Which need a push? Weekdays vs weekends?</div>
+      </div>
+    </div>
+    <div class="q-item">
+      <input type="checkbox" class="q-check">
+      <div class="q-content">
+        <div class="q-text">How active is boat sales vs rentals?</div>
+        <div class="q-hint">Rough split — should we promote Duffy sales or keep focus on rentals?</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== SECTION 2 ===== -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">2</div>
+    <h2>Chatbot</h2>
+    <span class="section-badge badge-discuss">Let's Discuss</span>
+  </div>
+  <div class="section-body">
+    <div class="context-note">
+      <strong>What we've already built into the chatbot knowledge base:</strong> All 35 FAQ answers, 3-tier pricing with all-in totals, cancellation policies, USCG Six-Pack rule, boat features, parking/transit info, nearby restaurants, sunset times, and occasion guides.
+    </div>
+
+    <div class="q-item">
+      <input type="checkbox" class="q-check">
+      <div class="q-content">
+        <div class="q-text">What questions do customers ask most often?</div>
+        <div class="q-hint">Phone calls, emails, DMs — what comes up again and again?</div>
+      </div>
+    </div>
+    <div class="q-item">
+      <input type="checkbox" class="q-check">
+      <div class="q-content">
+        <div class="q-text">Any questions that are annoying or repetitive?</div>
+        <div class="q-hint">These become the chatbot's top priority answers</div>
+      </div>
+    </div>
+    <div class="q-item">
+      <input type="checkbox" class="q-check">
+      <div class="q-content">
+        <div class="q-text">Should the chatbot link directly to the Peek booking page?</div>
+        <div class="q-hint">e.g., "Ready to book? Here's the link" — yes or no?</div>
+      </div>
+    </div>
+    <div class="q-item">
+      <input type="checkbox" class="q-check">
+      <div class="q-content">
+        <div class="q-text">Any topics it should NOT answer?</div>
+        <div class="q-hint">Legal, liability, insurance, employee matters — anything off-limits?</div>
+      </div>
+    </div>
+    <div class="q-item">
+      <input type="checkbox" class="q-check">
+      <div class="q-content">
+        <div class="q-text">When the bot can't answer, where should it send people?</div>
+        <div class="q-hint">Phone (617-981-5684)? Email? Contact form?</div>
+      </div>
+    </div>
+    <div class="q-item">
+      <input type="checkbox" class="q-check">
+      <div class="q-content">
+        <div class="q-text">We suggest a casual, fun tone — "like a friend who works at the dock." Sound right?</div>
+        <div class="q-hint">Or would you prefer more professional?</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== SECTION 3 ===== -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">3</div>
+    <h2>Marketing & Social Media</h2>
+    <span class="section-badge badge-discuss">Let's Discuss</span>
+  </div>
+  <div class="section-body">
+    <div class="q-item">
+      <input type="checkbox" class="q-check">
+      <div class="q-content">
+        <div class="q-text">Who manages social media currently? What tools?</div>
+        <div class="q-hint">You? An employee? Agency? Later, Hootsuite, manual?</div>
+      </div>
+    </div>
+    <div class="q-item">
+      <input type="checkbox" class="q-check">
+      <div class="q-content">
+        <div class="q-text">Current posting cadence — how often, which platforms?</div>
+        <div class="q-hint">e.g., 3x/week on Instagram, nothing on TikTok</div>
+      </div>
+    </div>
+    <div class="q-item">
+      <input type="checkbox" class="q-check">
+      <div class="q-content">
+        <div class="q-text">What content types perform best?</div>
+        <div class="q-hint">Reels, carousels, stories, static posts — what gets engagement?</div>
+      </div>
+    </div>
+    <div class="q-item">
+      <input type="checkbox" class="q-check">
+      <div class="q-content">
+        <div class="q-text">What's Nerd Marketing's ongoing role?</div>
+        <div class="q-hint">Built the site? Ongoing SEO? Hands-off now?</div>
+      </div>
+    </div>
+    <div class="q-item">
+      <input type="checkbox" class="q-check">
+      <div class="q-content">
+        <div class="q-text">Marketing budget / ad spend?</div>
+        <div class="q-hint">Running Meta ads? Budget range? Organic only?</div>
+      </div>
+    </div>
+    <div class="q-item">
+      <input type="checkbox" class="q-check">
+      <div class="q-content">
+        <div class="q-text">Any brand guidelines or asset library?</div>
+        <div class="q-hint">Style guide, photo library, video footage — or starting fresh?</div>
+      </div>
+    </div>
+    <div class="q-item">
+      <input type="checkbox" class="q-check">
+      <div class="q-content">
+        <div class="q-text">Do guests tag @bostonelectricboats? Any UGC?</div>
+        <div class="q-hint">User-generated content could be a goldmine</div>
+      </div>
+    </div>
+    <div class="q-item">
+      <input type="checkbox" class="q-check">
+      <div class="q-content">
+        <div class="q-text">Any existing video footage?</div>
+        <div class="q-hint">Drone, customer videos, promo reels — or need to create?</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== SECTION 4 ===== -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">4</div>
+    <h2>Pricing & Operations</h2>
+    <span class="section-badge badge-discuss">Fill Gaps</span>
+  </div>
+  <div class="section-body">
+    <div class="context-note">
+      <strong>We confirmed from Peek checkout:</strong> BYOC 6 pax ($439–$469, all-in ~$519), BYOC 12 pax ($519–$559, all-in ~$672), Captain 6 pax ($639–$659, all-in ~$762). No Captain 12 — USCG Six-Pack license caps at 6 passengers.
+    </div>
+
+    <div class="q-item">
+      <input type="checkbox" class="q-check">
+      <div class="q-content">
+        <div class="q-text">Do prices change by season, or just weekday vs weekend?</div>
+        <div class="q-hint">Same all year? Higher in July-August? Sunset slot premiums?</div>
+      </div>
+    </div>
+    <div class="q-item">
+      <input type="checkbox" class="q-check">
+      <div class="q-content">
+        <div class="q-text">Any group or corporate discount structures?</div>
+        <div class="q-hint">Multi-boat discounts? Custom corporate pricing?</div>
+      </div>
+    </div>
+    <div class="q-item">
+      <input type="checkbox" class="q-check">
+      <div class="q-content">
+        <div class="q-text">The Boat Rentals page shows "$499" — outdated or simplified?</div>
+      </div>
+    </div>
+    <div class="q-item">
+      <input type="checkbox" class="q-check">
+      <div class="q-content">
+        <div class="q-text">Waiting area at the dock for early arrivals?</div>
+      </div>
+    </div>
+    <div class="q-item">
+      <input type="checkbox" class="q-check">
+      <div class="q-content">
+        <div class="q-text">How big is the cooler? Charcuterie add-on — delivered to the boat or dock?</div>
+      </div>
+    </div>
+    <div class="q-item">
+      <input type="checkbox" class="q-check">
+      <div class="q-content">
+        <div class="q-text">How long does the battery last beyond the 2-hour rental?</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== SECTION 5 ===== -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">5</div>
+    <h2>Boat Sales</h2>
+    <span class="section-badge badge-discuss">If Time</span>
+  </div>
+  <div class="section-body">
+    <div class="q-item">
+      <input type="checkbox" class="q-check">
+      <div class="q-content">
+        <div class="q-text">Do you help connect buyers with financing / lenders?</div>
+      </div>
+    </div>
+    <div class="q-item">
+      <input type="checkbox" class="q-check">
+      <div class="q-content">
+        <div class="q-text">Does BEB offer service or maintenance for boats you sell?</div>
+      </div>
+    </div>
+    <div class="q-item">
+      <input type="checkbox" class="q-check">
+      <div class="q-content">
+        <div class="q-text">Would you consider rental-credit-toward-purchase?</div>
+        <div class="q-hint">Could be a great sales incentive</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== SECTION 6 ===== -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">6</div>
+    <h2>Quick Confirms</h2>
+    <span class="section-badge badge-confirm">Verify</span>
+  </div>
+  <div class="section-body">
+    <div class="tip-box">
+      <span>&#9989;</span>
+      <span>We pre-filled these from our research. Just let us know if anything looks off — otherwise we'll run with it!</span>
+    </div>
+
+    <div class="q-item">
+      <input type="checkbox" class="q-check">
+      <div class="q-content">
+        <div class="q-text">Parking suggestions accurate?</div>
+        <div class="q-hint">Lewis Wharf lot, Sargent's Wharf, Aquarium T stop</div>
+      </div>
+    </div>
+    <div class="q-item">
+      <input type="checkbox" class="q-check">
+      <div class="q-content">
+        <div class="q-text">Tipping guidance — any official policy?</div>
+        <div class="q-hint">We suggested: no tip for self-drive, 15-20% for captained</div>
+      </div>
+    </div>
+    <div class="q-item">
+      <input type="checkbox" class="q-check">
+      <div class="q-content">
+        <div class="q-text">Occasion list look right?</div>
+        <div class="q-hint">Birthdays, bachelorettes, corporate, proposals, date night, family</div>
+      </div>
+    </div>
+    <div class="q-item">
+      <input type="checkbox" class="q-check">
+      <div class="q-content">
+        <div class="q-text">Restaurant recommendations — your personal favorites?</div>
+        <div class="q-hint">We listed Sail Loft, Joe's Waterfront, North End spots</div>
+      </div>
+    </div>
+    <div class="q-item">
+      <input type="checkbox" class="q-check">
+      <div class="q-content">
+        <div class="q-text">Do people book for photo shoots?</div>
+      </div>
+    </div>
+    <div class="q-item">
+      <input type="checkbox" class="q-check">
+      <div class="q-content">
+        <div class="q-text">What did customers consider before choosing BEB?</div>
+        <div class="q-hint">Our research found zero direct competitors in Boston</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Footer -->
+<div class="footer-nav">
+  <a href="index.html"><span>&larr;</span> Back to Portal</a>
+</div>
+<p class="footer-note">Prepared by Nulite &bull; March 2026</p>
+
+</div><!-- /container -->
+
+<script>
+(function() {
+  const checks = document.querySelectorAll('.q-check');
+  const fill = document.getElementById('progFill');
+  const text = document.getElementById('progText');
+  const total = checks.length;
+
+  function update() {
+    let done = 0;
+    checks.forEach(c => { if (c.checked) done++; });
+    const pct = Math.round((done / total) * 100);
+    fill.style.width = pct + '%';
+    text.textContent = done + ' / ' + total + ' covered';
+  }
+
+  checks.forEach(c => c.addEventListener('change', update));
+  update();
+})();
+</script>
+
+</body>
+</html>
