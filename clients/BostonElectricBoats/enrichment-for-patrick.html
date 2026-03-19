@@ -902,18 +902,21 @@
 
 </div><!-- /container -->
 
-<!-- PROGRESS TRACKER + AUTOSAVE SCRIPT -->
+<!-- AUTOSAVE + PROGRESS TRACKER (shared base.js) -->
 <script>
 (function() {
-  var STORAGE_KEY = 'beb-enrichment-form';
   var textareas = document.querySelectorAll('textarea');
   var checkboxes = document.querySelectorAll('input[type="checkbox"]');
+  if (textareas.length === 0 && checkboxes.length === 0) return;
+
+  var STORAGE_KEY = 'cp-' + window.location.pathname.replace(/[^a-z0-9]/gi, '-').replace(/-+/g, '-');
   var fill = document.getElementById('progressFill');
   var text = document.getElementById('progressText');
   var total = textareas.length + checkboxes.length;
   var saveTimer = null;
 
-  function update() {
+  function updateProgress() {
+    if (!fill || !text) return;
     var filled = 0;
     textareas.forEach(function(t) { if (t.value.trim().length > 0) filled++; });
     checkboxes.forEach(function(c) { if (c.checked) filled++; });
@@ -957,16 +960,14 @@
     setTimeout(function() { el.style.opacity = '0'; }, 2000);
   }
 
-  // Restore saved data on load
   restore();
-  update();
+  updateProgress();
 
-  // Save on every change
   textareas.forEach(function(t) {
-    t.addEventListener('input', function() { update(); debouncedSave(); });
+    t.addEventListener('input', function() { updateProgress(); debouncedSave(); });
   });
   checkboxes.forEach(function(c) {
-    c.addEventListener('change', function() { update(); debouncedSave(); });
+    c.addEventListener('change', function() { updateProgress(); debouncedSave(); });
   });
 })();
 </script>
