@@ -1145,6 +1145,78 @@ tr:nth-child(even) td { background: var(--gray-50); }
   checkboxes.forEach(function(c) {
     c.addEventListener('change', function() { updateProgress(); debouncedSave(); });
   });
+
+  // ─── JSON Export ───
+  // Wire up any button with data-export="json"
+  function exportJSON() {
+    var sections = document.querySelectorAll('section');
+    var result = {
+      page: document.title,
+      exportedAt: new Date().toISOString(),
+      sections: []
+    };
+
+    sections.forEach(function(section) {
+      var headerEl = section.querySelector('.section-header h2');
+      var sectionName = headerEl ? headerEl.textContent.trim() : 'Untitled';
+      var sectionData = { name: sectionName, responses: [] };
+
+      // Collect textarea answers with their labels
+      var questions = section.querySelectorAll('.question');
+      questions.forEach(function(q) {
+        var labelEl = q.querySelector('label');
+        var textareaEl = q.querySelector('textarea');
+        if (labelEl && textareaEl) {
+          sectionData.responses.push({
+            type: 'answer',
+            question: labelEl.textContent.trim(),
+            answer: textareaEl.value.trim()
+          });
+        }
+      });
+
+      // Collect verify checkboxes with their suggested text + corrections
+      var verifies = section.querySelectorAll('.verify');
+      verifies.forEach(function(v) {
+        var labelEl = v.querySelector('label');
+        var checkboxEl = v.querySelector('input[type="checkbox"]');
+        var textareaEl = v.querySelector('textarea');
+        // Find the preceding .suggested block for context
+        var prev = v.previousElementSibling;
+        var suggestedTitle = '';
+        if (prev && prev.classList.contains('suggested')) {
+          var h4 = prev.querySelector('h4');
+          if (h4) suggestedTitle = h4.textContent.trim();
+        }
+        sectionData.responses.push({
+          type: 'verify',
+          topic: suggestedTitle || (labelEl ? labelEl.textContent.trim() : ''),
+          approved: checkboxEl ? checkboxEl.checked : false,
+          correction: textareaEl ? textareaEl.value.trim() : ''
+        });
+      });
+
+      if (sectionData.responses.length > 0) {
+        result.sections.push(sectionData);
+      }
+    });
+
+    // Download as file
+    var blob = new Blob([JSON.stringify(result, null, 2)], { type: 'application/json' });
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    a.href = url;
+    a.download = STORAGE_KEY.replace(/^cp-/, '') + '-responses.json';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  }
+
+  var exportBtns = document.querySelectorAll('[data-export="json"]');
+  exportBtns.forEach(function(btn) {
+    btn.addEventListener('click', exportJSON);
+  });
 })();
 
 </script>
